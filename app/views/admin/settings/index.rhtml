@@ -52,7 +52,9 @@
   <h3>Spam prevention</h3>
   <p>At the moment Mephisto uses <%= link_to 'Akismet', 'http://akismet.com' %> to automatically handle spam.  If you leave out the Akismet settings, you can moderate new comments from the Overview.</p>
   <dl class="setform">
-    <dt><label>Akismet API Key</label></dt> 
+    <dt><label>Detector</label></dt>
+    <dd><%= f.select :akismet_detector, Akismet.detectors.keys.collect{|d| [d.to_s.capitalize, d.to_s] } %></dd>
+    <dt><label>API Key</label></dt> 
     <dd><%= f.text_field :akismet_key %></dd>
     <dt><label>Blog url</label></dt> 
     <dd><%= f.text_field :akismet_url %></dd>
