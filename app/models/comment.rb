@@ -61,7 +61,7 @@ class Comment < Content
   def check_approval(site, request)
     self.approved = site.approve_comments?
     if valid_comment_system?(site)
-      akismet = Akismet.new(site.akismet_key, site.akismet_url)
+      akismet = Akismet.new(site.akismet_key, site.akismet_url, site.akismet_detector.to_sym)
       self.approved = !akismet.comment_check(comment_spam_options(site, request))
       logger.info "Checking Akismet (#{site.akismet_key}) for new comment on Article #{article_id}.  #{approved? ? 'Approved' : 'Blocked'}"
       logger.warn "Odd Akismet Response: #{akismet.last_response.inspect}" unless Akismet.normal_responses.include?(akismet.last_response)
