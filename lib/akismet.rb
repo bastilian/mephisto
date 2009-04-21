@@ -10,7 +10,7 @@ require 'uri'
 # rewritten to be more rails-like
 class Akismet
   
-  cattr_accessor :valid_responses, :normal_responses
+  cattr_accessor :valid_responses, :normal_responses, :detectors
   attr_accessor :proxy_port, :proxy_host
   attr_reader :last_response
 
@@ -20,6 +20,7 @@ class Akismet
     'User-Agent'   => 'Mephisto/' << Mephisto::Version::STRING,
     'Content-Type' => 'application/x-www-form-urlencoded'
   }
+  @@detectors = {:akismet => "rest.akismet.com", :typepad => "api.antispam.typepad.com"}
   
   # Create a new instance of the Akismet class
   #
@@ -27,9 +28,10 @@ class Akismet
   #   Your Akismet API key
   # blog 
   #   The blog associated with your api key
-  def initialize(api_key, blog)
+  def initialize(api_key, blog, detector = :akismet)
     @api_key      = api_key
     @blog         = blog
+    @detector     = detector
     @verified_key = false
     @proxy_port   = nil
     @proxy_host   = nil
@@ -104,7 +106,7 @@ class Akismet
     # Other server enviroment variables
     #    In PHP there is an array of enviroment variables called $_SERVER which contains information about the web server itself as well as a key/value for every HTTP header sent with the request. This data is highly useful to Akismet as how the submited content interacts with the server can be very telling, so please include as much information as possible.  
     def call_akismet(akismet_function, options = {})
-      http = Net::HTTP.new("#{@api_key}.rest.akismet.com", 80, @proxy_host, @proxy_port)
+      http = Net::HTTP.new("#{@api_key}.#{@@detectors[@detector]}", 80, @proxy_host, @proxy_port)
       data = URI.escape(options.update(:blog => @blog).inject([]) { |data, opt| data << '%s=%s' % opt } * '&')              
       resp, @last_response = http.post("/1.1/#{akismet_function}", data, STANDARD_HEADERS)
       @last_response
@@ -112,8 +114,9 @@ class Akismet
 
     # Call to check and verify your API key. You may then call the #hasVerifiedKey method to see if your key has been validated.
     def verify_api_key
-      http = Net::HTTP.new('rest.akismet.com', 80, @proxy_host, @proxy_port)
+      http = Net::HTTP.new(@@detectors[@detector], 80, @proxy_host, @proxy_port)
       resp, data = http.post('/1.1/verify-key', "key=#{@api_key}&blog=#{@blog}", STANDARD_HEADERS)
       @verified_key = (data == "valid") ? true : :false
     end
+    
 end
