@@ -69,10 +69,6 @@ Rails::Initializer.run do |config|
   # Allow table tags in untrusted HTML, but block img tags to prevent
   # SRC attributes from being used in CSRF attacks.
   config.action_view.sanitized_allowed_tags = ['table', 'tr', 'td']
-  config.after_initialize do
-    ActionView::Base.sanitized_allowed_tags.delete 'img'
-    ActionView::Base.sanitized_allowed_attributes.delete 'src'
-  end
 
   # We're slowly moving the contents of vendor and vender/plugins into
   # vendor/gems by adding config.gem declarations.
