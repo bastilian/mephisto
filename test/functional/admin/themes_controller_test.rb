@@ -86,7 +86,7 @@ class AdminThemesControllerTest < ActiveSupport::TestCase
   
   test "should not change theme with a get" do
     get :change_to, :id => 'encytemedia'
-    assert_redirected_to :action => 'index'
+    assert_redirected_to :action => 'show', :id => 'encytemedia'
     assert_not_equal 'encytemedia', sites(:first).reload.current_theme_path
     assert_not_equal 'encytemedia', sites(:first).theme.name
     assert_not_equal 'Encytemedia', sites(:first).theme.title
