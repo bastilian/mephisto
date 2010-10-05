@@ -64,7 +64,7 @@ class Test::Unit::TestCase
   self.use_instantiated_fixtures  = false
 
   def self.has_image_processor?
-    @has_image_processor ||= Object.const_defined?(:ImageScience) || Object.const_defined?(:Magick)
+    @has_image_processor ||= Object.const_defined?(:ImageScience) || Object.const_defined?(:Magick) || Object.const_defined?(:MiniMagick)
   end
   
   def has_image_processor?
