@@ -11,6 +11,18 @@ class Admin::BaseController < ApplicationController
   protect_from_forgery
   
   protected
+    def protect_action
+      if request.get?
+        if params[:id]
+          redirect_to :action => 'show', :id => params[:id]
+        else
+          redirect_to :action => 'index'
+        end
+      else
+        true
+      end
+    end
+
     # standard authorization method.  allow logged in users that are admins, or members in certain actions
     def authorized?
       logged_in? && (admin? || member_actions.include?(action_name) || allow_member?)

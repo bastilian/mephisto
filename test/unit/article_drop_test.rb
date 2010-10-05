@@ -1,39 +1,34 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class ArticleDropWithRelativeRootTest < ActiveSupport::TestCase
-  fixtures :sites, :sections, :contents, :assigned_sections, :users, :tags, :taggings, :assigned_assets, :assets
+['', '/blog'].each do |root|
+  context "Article Drop with relative root = #{root.inspect}" do
+    fixtures :sites, :sections, :contents, :assigned_sections, :users, :tags, :taggings, :assigned_assets, :assets
 
-  # Subclass this test case and override this function to test other roots.
-  def root() '' end
+    setup do
+      @context = mock_context('site' => sites(:first).to_liquid)
+      @article = contents(:welcome).to_liquid(:mode => :single)
+      @article.context = @context
+      Mephisto::Liquid::UrlMethods.stubs(:relative_url_root).returns(root)
+    end
 
-  def setup
-    @context = mock_context('site' => sites(:first).to_liquid)
-    @article = contents(:welcome).to_liquid(:mode => :single)
-    @article.context = @context
-    Mephisto::Liquid::UrlMethods.stubs(:relative_url_root).returns(root)
-  end
+    specify "should show article url" do
+      t = Time.now.utc - 3.days
+      assert_equal "#{root}/#{t.year}/#{t.month}/#{t.day}/welcome-to-mephisto", @article.url
+    end
 
-  test "should show article url" do
-    t = Time.now.utc - 3.days
-    assert_equal "#{root}/#{t.year}/#{t.month}/#{t.day}/welcome-to-mephisto", @article.url
-  end
+    specify "should show comments feed url" do
+      t = Time.now.utc - 3.days
+      assert_equal "#{root}/#{t.year}/#{t.month}/#{t.day}/welcome-to-mephisto/comments.xml", @article.comments_feed_url
+    end
 
-  test "should show comments feed url" do
-    t = Time.now.utc - 3.days
-    assert_equal "#{root}/#{t.year}/#{t.month}/#{t.day}/welcome-to-mephisto/comments.xml", @article.comments_feed_url
-  end
-
-  test "should change feed url" do
-    t = Time.now.utc - 3.days
-    assert_equal "#{root}/#{t.year}/#{t.month}/#{t.day}/welcome-to-mephisto/changes.xml", @article.changes_feed_url
+    specify "should change feed url" do
+      t = Time.now.utc - 3.days
+      assert_equal "#{root}/#{t.year}/#{t.month}/#{t.day}/welcome-to-mephisto/changes.xml", @article.changes_feed_url
+    end
   end
 end
 
-class ArticleDropWithRelativeRootBlogTest < ArticleDropWithRelativeRootTest
-  def root() '/blog' end
-end
-
-class ArticleDropTest < ActiveSupport::TestCase
+context "Article Drop" do
   fixtures :sites, :sections, :contents, :assigned_sections, :users, :tags, :taggings, :assigned_assets, :assets
   
   def setup
@@ -104,7 +99,7 @@ class ArticleDropTest < ActiveSupport::TestCase
     assert_equal '<p>body</p>', a.send(:body_for_mode, :list)
   end
 
-  test "should show taggable tags" do
+  specify "should show taggable tags" do
     assert_equal %w(rails), contents(:another).to_liquid.tags
   end
 
