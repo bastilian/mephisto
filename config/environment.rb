@@ -85,6 +85,9 @@ Rails::Initializer.run do |config|
   config.gem 'tzinfo', :version => '>= 0.3.12'
   config.gem 'emk-safe_erb', :version => '>= 0.1.1', :lib => 'safe_erb',
              :source => 'http://gems.github.com'
+ 
+  config.gem "rspec", :lib => false, :version => "1.3.0"
+  config.gem "rspec-rails", :lib => false, :version => "1.3.2"
 end
 
 # Don't update this file, make custom tweaks in config/initializers/custom.rb, 
