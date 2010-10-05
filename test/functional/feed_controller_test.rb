@@ -75,7 +75,7 @@ class AboutSectionFeedTest < ActiveSupport::TestCase
   end
   
   # TODO: Fails due to asset test deleting asset fixtures
-  specify "should show correct links" do
+  test "should show correct links" do
     return if Asset.count == 1
     assert_select 'feed>link[href=?][type=?]', 'http://test.host/about', 'text/html'
     assert_select 'feed>entry>link[href]', 4 do |hrefs|
@@ -87,7 +87,7 @@ class AboutSectionFeedTest < ActiveSupport::TestCase
   end
 end
 
-context "Home Section Feed" do
+class HomeSectionFeedTest < ActiveSupport::TestCase
   fixtures :contents, :sections, :assigned_sections, :sites, :assets, :assigned_assets
   def setup
     @controller = FeedController.new
@@ -106,7 +106,7 @@ context "Home Section Feed" do
   end
   
   # TODO: Fails due to asset test deleting asset fixtures
-  specify "should show correct links" do
+  test "should show correct links" do
     return if Asset.count == 1
     assert_select 'feed>link[href=?][type=?]', 'http://test.host/', 'text/html'
     assert_select 'feed>entry>link[href]', 3 do |hrefs|
@@ -117,7 +117,7 @@ context "Home Section Feed" do
   end
 
   # TODO: Fails due to asset test deleting asset fixtures
-  specify "should show podcast" do
+  test "should show podcast" do
     return if Asset.count == 1
     assert_select 'feed>entry>link[rel=?][length=?][type=?]', 'enclosure', '252366', 'audio/mpeg'
   end
