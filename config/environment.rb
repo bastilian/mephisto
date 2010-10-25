@@ -78,7 +78,7 @@ Rails::Initializer.run do |config|
   config.gem 'notahat-machinist', :lib => 'machinist',
              :source => 'http://gems.github.com'
   config.gem 'rubyzip', :lib => 'zip/zipfilesystem'
-  config.gem 'liquid'
+  config.gem 'liquid', :version => '1.9.0'
   config.gem 'will_paginate'
   config.gem 'mocha'
   config.gem 'coderay'
