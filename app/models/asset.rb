@@ -47,7 +47,7 @@ class Asset < ActiveRecord::Base
   belongs_to :site
   has_many :assigned_assets, :order => 'position', :dependent => :destroy
 
-  has_attachment :storage => :file_system, :thumbnails => { :thumb => '120>', :tiny => '50>' }, :max_size => 30.megabytes, 
+  has_attachment :storage => :file_system, :thumbnails => { :thumb => '120>', :medium => '250>', :tiny => '50>' }, :max_size => 30.megabytes, 
     :processor => (Object.const_defined?(:ASSET_IMAGE_PROCESSOR) ? ASSET_IMAGE_PROCESSOR : nil)
 
   # When we call has_attachment, it protects all attribute on this class
