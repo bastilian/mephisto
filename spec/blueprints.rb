@@ -1,3 +1,4 @@
+require "machinist/active_record"
 require 'faker'
 
 Sham.title { Faker::Lorem.sentence }
