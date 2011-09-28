@@ -69,25 +69,6 @@ Rails::Initializer.run do |config|
   # Allow table tags in untrusted HTML, but block img tags to prevent
   # SRC attributes from being used in CSRF attacks.
   config.action_view.sanitized_allowed_tags = ['table', 'tr', 'td']
-
-  # We're slowly moving the contents of vendor and vender/plugins into
-  # vendor/gems by adding config.gem declarations.
-  config.gem 'RedCloth', :version => '3.0.4', :lib => 'redcloth'
-  config.gem 'BlueCloth', :lib => 'bluecloth'
-  config.gem 'faker'
-  config.gem 'notahat-machinist', :lib => 'machinist',
-             :source => 'http://gems.github.com'
-  config.gem 'rubyzip', :lib => 'zip/zipfilesystem'
-  config.gem 'liquid', :version => '1.9.0'
-  config.gem 'will_paginate'
-  config.gem 'mocha'
-  config.gem 'coderay'
-  config.gem 'tzinfo', :version => '>= 0.3.12'
-  config.gem 'emk-safe_erb', :version => '>= 0.1.1', :lib => 'safe_erb',
-             :source => 'http://gems.github.com'
- 
-  config.gem "rspec", :lib => false, :version => "1.3.0"
-  config.gem "rspec-rails", :lib => false, :version => "1.3.2"
 end
 
 # Don't update this file, make custom tweaks in config/initializers/custom.rb, 
