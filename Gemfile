@@ -14,6 +14,10 @@ gem 'coderay'
 gem 'tzinfo', '>= 0.3.12'
 gem 'safe_erb', '>= 0.1.1', :git => 'https://github.com/emk/safe_erb.git'
 
+group :development do
+  gem 'unicorn'
+end
+
 group :test do
   gem 'faker'
   gem 'machinist'
