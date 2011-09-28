@@ -1,0 +1,7 @@
+branches:
+  only:
+    - master
+notifications:
+  email:
+    - sebastian@validcode.me
+before_script: 'rake config/initializers/session_store.rb'
