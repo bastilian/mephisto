@@ -1,6 +1,6 @@
 # this is for standard library loading and configuration.  All the hardcore monkey patching is in the mephisto plugin.
 require 'action_controller/dispatcher'
-require 'ruby_pants'
+require 'rubypants'
 require 'xmlrpc_patch'
 require 'base64'
 

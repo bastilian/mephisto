@@ -13,6 +13,11 @@ gem 'mocha'
 gem 'coderay'
 gem 'tzinfo', '>= 0.3.12'
 gem 'safe_erb', '>= 0.1.1', :git => 'https://github.com/emk/safe_erb.git'
+gem 'rubyzip'
+
+gem 'acts_as_list', '0.1.2'
+gem 'acts_as_versioned', :git => 'https://github.com/technoweenie/acts_as_versioned.git', :tag => 'rails_2'
+gem 'rubypants', '0.2.0'
 
 group :development do
   gem 'unicorn'
