@@ -88,7 +88,7 @@ class AccountControllerCookieTest < ActionController::TestCase
     @request.cookies["token"] = cookie_for(:quentin)
     login_as :quentin
     post :logout
-    assert_equal @response.cookies['token'], []
+    assert_equal @response.cookies['token'], nil
   end
 
   test "should login with cookie" do
