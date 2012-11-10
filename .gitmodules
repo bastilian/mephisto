@@ -4,6 +4,3 @@
 [submodule "vendor/plugins/safe_erb"]
 	path = vendor/plugins/safe_erb
 	url = git://github.com/abedra/safe-erb.git
-[submodule "vendor/plugins/acts_as_paranoid"]
-	path = vendor/plugins/acts_as_paranoid
-	url = git://github.com/bastilian/acts_as_paranoid.git
