@@ -2,7 +2,6 @@
 source "http://rubygems.org"
 
 gem "rails", '2.2.2'
-gem 'sqlite3'
 gem 'rdoc'
 gem 'RedCloth', '3.0.4', :require => 'redcloth'
 gem 'BlueCloth', :require => 'bluecloth'
@@ -21,9 +20,11 @@ gem 'rubypants', '0.2.0'
 
 group :development do
   gem 'unicorn'
+  gem 'sqlite3'
 end
 
 group :test do
+  gem 'mysql'
   gem 'faker'
   gem 'machinist'
   gem 'ruby-debug'
