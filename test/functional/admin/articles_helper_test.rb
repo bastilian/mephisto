@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../../test_helper'
 
-class Admin::ArticlesHelperTest < Test::Unit::TestCase
+class Admin::ArticlesHelperTest < ActionController::TestCase
   include Admin::ArticlesHelper
   
   def test_should_show_published_at_dates

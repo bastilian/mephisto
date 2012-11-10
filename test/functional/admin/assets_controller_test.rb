@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../../test_helper'
 # Re-raise errors caught by the controller.
 class Admin::AssetsController; def rescue_action(e) raise e end; end
 
-class Admin::AssetsControllerTest < Test::Unit::TestCase
+class Admin::AssetsControllerTest < ActionController::TestCase
   fixtures :sites, :assets, :users, :tags, :taggings, :contents, :memberships
 
   def setup

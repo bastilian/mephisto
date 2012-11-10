@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../../test_helper'
 # Re-raise errors caught by the controller.
 class Admin::ThemesController; def rescue_action(e) raise e end; end
 
-class AdminThemesControllerTest < ActiveSupport::TestCase
+class AdminThemesControllerTest < ActionController::TestCase
   fixtures :users, :sections, :sites, :memberships
   
   def setup

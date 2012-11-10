@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 # Re-raise errors caught by the controller.
 class MephistoController; def rescue_action(e) raise e end; end
 
-class MephistoControllerRedirectionsTest < ActiveSupport::TestCase
+class MephistoControllerRedirectionsTest < ActionController::TestCase
   fixtures :sites
 
   def setup

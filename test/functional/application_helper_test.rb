@@ -12,7 +12,7 @@ ApplicationHelperTestController = Class.new ApplicationController do
   end
 end
 
-class ApplicationHelperTest < Test::Unit::TestCase
+class ApplicationHelperTest < ActionController::TestCase
   fixtures :assets, :users
   include ActionView::Helpers::TagHelper, ApplicationHelper
   

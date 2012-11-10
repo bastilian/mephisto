@@ -4,7 +4,7 @@ require File.dirname(__FILE__) + '/../../test_helper'
 class Admin::AssetsController; def rescue_action(e) raise e end; end
 
 # special test suite that clears the assets table and assets
-class Admin::AssetsControllerUploadTest < Test::Unit::TestCase
+class Admin::AssetsControllerUploadTest < ActionController::TestCase
   fixtures :sites, :users, :assets
 
   def setup

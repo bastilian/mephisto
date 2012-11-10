@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../../test_helper'
 # Re-raise errors caught by the controller.
 class Admin::CommentsController; def rescue_action(e) raise e end; end
 
-class Admin::CommentsControllerTest < Test::Unit::TestCase
+class Admin::CommentsControllerTest < ActionController::TestCase
   fixtures :contents, :users, :sites, :memberships
   def setup
     @controller = Admin::CommentsController.new

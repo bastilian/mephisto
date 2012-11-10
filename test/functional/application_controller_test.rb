@@ -8,7 +8,7 @@ class AccountController
   end
 end
 
-class ApplicationControllerTest < Test::Unit::TestCase
+class ApplicationControllerTest < ActionController::TestCase
   fixtures :sites
   def setup
     @sub   = Site.create!(:title => 'sub', :host => 'sub.test.host')

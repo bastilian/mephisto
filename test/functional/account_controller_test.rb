@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 # Re-raise errors caught by the controller.
 class AccountController; def rescue_action(e) raise e end; end
 
-class AccountControllerLoginTest < ActiveSupport::TestCase
+class AccountControllerLoginTest < ActionController::TestCase
   fixtures :users, :sites, :memberships
 
   def setup
@@ -65,7 +65,7 @@ class AccountControllerLoginTest < ActiveSupport::TestCase
   end
 end
 
-class AccountControllerCookieTest < ActiveSupport::TestCase
+class AccountControllerCookieTest < ActionController::TestCase
   fixtures :users, :sites, :memberships
 
   def setup
@@ -124,7 +124,7 @@ class AccountControllerCookieTest < ActiveSupport::TestCase
     end
 end
 
-class AccountControllerPasswordResetTest < ActiveSupport::TestCase
+class AccountControllerPasswordResetTest < ActionController::TestCase
   fixtures :users, :sites, :memberships
 
   def setup
