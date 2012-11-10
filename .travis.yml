@@ -9,7 +9,7 @@ notifications:
   email:
     - sebastian.graessl@gmail.com
 script:
-  - RAILS_ENV=test bundle exec rake --trace db:migrate test
+  - RAILS_ENV=test bundle exec rake --trace db:schema:load db:migrate test
 before_script:
   - rake config/initializers/session_store.rb
   - mysql -e 'create database mephisto_test'
