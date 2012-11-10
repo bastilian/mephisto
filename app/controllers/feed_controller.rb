@@ -1,6 +1,6 @@
 class FeedController < ApplicationController
   layout nil
-  session :off
+
   caches_page_with_references :feed
 
   def feed

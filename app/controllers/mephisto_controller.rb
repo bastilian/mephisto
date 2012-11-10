@@ -1,6 +1,6 @@
 class MephistoController < ApplicationController
   layout nil
-  session :off
+
   caches_page_with_references :dispatch
   cache_sweeper :comment_sweeper
 
