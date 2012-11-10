@@ -5,6 +5,13 @@ GIT
     safe_erb (0.1.2)
 
 GIT
+  remote: https://github.com/notahat/machinist.git
+  revision: 47fa070c99ec96ede665a27bc9d1e205847a387d
+  branch: 1.0-maintenance
+  specs:
+    machinist (1.0.6)
+
+GIT
   remote: https://github.com/technoweenie/acts_as_versioned.git
   revision: 589289fd42b2600d5f643c85e3e4e38e03ac655e
   tag: rails_2
@@ -40,7 +47,6 @@ GEM
       rbx-require-relative (> 0.0.4)
     liquid (1.9.0)
       hoe (>= 1.5.1)
-    machinist (2.0)
     metaclass (0.0.1)
     mocha (0.12.7)
       metaclass (~> 0.0.1)
@@ -58,10 +64,10 @@ GEM
     rbx-require-relative (0.0.9)
     rdoc (3.12)
       json (~> 1.4)
-    rspec (1.3.2)
-    rspec-rails (1.3.4)
+    rspec (1.3.0)
+    rspec-rails (1.3.2)
       rack (>= 1.0.0)
-      rspec (~> 1.3.1)
+      rspec (>= 1.3.0)
     ruby-debug (0.10.4)
       columnize (>= 0.1)
       ruby-debug-base (~> 0.10.4.0)
@@ -76,6 +82,7 @@ GEM
       rack
       raindrops (~> 0.7)
     will_paginate (2.3.16)
+    xml-simple (1.1.2)
 
 PLATFORMS
   ruby
@@ -88,13 +95,13 @@ DEPENDENCIES
   coderay
   faker
   liquid (= 1.9.0)
-  machinist
+  machinist!
   mocha
   mysql
   rails (= 2.3.14)
   rdoc
-  rspec (= 1.3.2)
-  rspec-rails (= 1.3.4)
+  rspec (= 1.3.0)
+  rspec-rails (= 1.3.2)
   ruby-debug
   rubypants (= 0.2.0)
   rubyzip
@@ -103,3 +110,4 @@ DEPENDENCIES
   tzinfo (>= 0.3.12)
   unicorn
   will_paginate (~> 2.3.16)
+  xml-simple
