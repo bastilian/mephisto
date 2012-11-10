@@ -59,7 +59,7 @@ Mephisto::Routing.redirect \
   '/sanitize/path'            => 'foo://bar',
   'redirect/external'         => 'http://external/$1/$2'
 
-class Test::Unit::TestCase
+class ActiveSupport::TestCase
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
 
