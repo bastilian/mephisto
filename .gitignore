@@ -2,6 +2,9 @@
 .rake_tasks
 .powconfig
 .rbenv-version
+.powrc
+.rvmrc
+coverage
 Capfile
 config/deploy.rb
 config/initializers/session_store.rb
