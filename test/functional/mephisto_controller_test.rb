@@ -405,7 +405,7 @@ class MephistoControllerTest < ActionController::TestCase
 
   protected
     def dispatch(path = '', options = {})
-      path = path[1..-1] if path.starts_with('/')
+      path = path[1..-1] if path.starts_with?('/')
       send(options.delete(:method) || :get, :dispatch, options.merge(:path => path.split('/')))
     end
 

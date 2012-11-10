@@ -50,7 +50,7 @@ class MephistoControllerRedirectionsTest < ActionController::TestCase
     end
 
     def dispatch(path = '', options = {})
-      path = path[1..-1] if path.starts_with('/')
+      path = path[1..-1] if path.starts_with?('/')
       get :dispatch, options.merge(:path => path.split('/'))
     end
 end

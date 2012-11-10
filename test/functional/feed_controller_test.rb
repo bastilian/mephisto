@@ -137,7 +137,7 @@ class HomeSectionFeedTest < ActionController::TestCase
 
   test "should not double escape html" do
     text = @contents.first.get_text.to_s.strip
-    assert text.starts_with("welcome summary\n&lt;p&gt;quentin&#8217;s &#8220;welcome&#8221;"), "'#{text.inspect}' was double escaped"
+    assert text.starts_with?("welcome summary\n&lt;p&gt;quentin&#8217;s &#8220;welcome&#8221;"), "'#{text.inspect}' was double escaped"
   end
   
   test "should sanitize content" do
