@@ -1,7 +1,15 @@
 branches:
   only:
     - master
+language: ruby
+rvm:
+  - "1.8.7"
+  - "1.9.2"
 notifications:
   email:
-    - sebastian@validcode.me
-before_script: 'rake config/initializers/session_store.rb'
+    - sebastian.graessl@gmail.com
+script:
+  - RAILS_ENV=test bundle exec rake --trace db:migrate test
+before_script:
+  - rake config/initializers/session_store.rb
+  - mysql -e 'create database mephisto_test'
