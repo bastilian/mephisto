@@ -10,7 +10,6 @@ gem 'liquid', '1.9.0'
 gem 'will_paginate', '~> 2.3.16'
 gem 'coderay'
 gem 'tzinfo', '>= 0.3.12'
-gem 'safe_erb', '>= 0.1.1', :git => 'git://github.com/emk/safe_erb.git'
 gem 'rubyzip'
 
 gem 'acts_as_list', '0.1.2'

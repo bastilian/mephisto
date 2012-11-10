@@ -1,3 +1,6 @@
 [submodule "vendor/plugins/attachment_fu"]
 	path = vendor/plugins/attachment_fu
 	url = git://github.com/bastilian/attachment_fu.git
+[submodule "vendor/plugins/safe_erb"]
+	path = vendor/plugins/safe_erb
+	url = git://github.com/abedra/safe-erb.git

@@ -1,10 +1,4 @@
 GIT
-  remote: git://github.com/emk/safe_erb.git
-  revision: 59327ee8a18bbaa26c613aac5c6f1d9575aa6202
-  specs:
-    safe_erb (0.1.2)
-
-GIT
   remote: git://github.com/notahat/machinist.git
   revision: 47fa070c99ec96ede665a27bc9d1e205847a387d
   branch: 1.0-maintenance
@@ -105,7 +99,6 @@ DEPENDENCIES
   ruby-debug
   rubypants (= 0.2.0)
   rubyzip
-  safe_erb (>= 0.1.1)!
   sqlite3
   tzinfo (>= 0.3.12)
   unicorn
