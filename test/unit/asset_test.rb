@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class AssetTest < Test::Unit::TestCase
+class AssetTest < ActiveSupport::TestCase
   fixtures :sites, :assets, :tags, :taggings
 
   def test_should_upload_and_create_asset_records

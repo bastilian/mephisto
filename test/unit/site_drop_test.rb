@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class SiteDropTest < Test::Unit::TestCase
+class SiteDropTest < ActiveSupport::TestCase
   fixtures :sites, :sections, :tags, :taggings, :contents
   
   def setup

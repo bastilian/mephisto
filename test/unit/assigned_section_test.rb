@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class AssignedSectionTest < Test::Unit::TestCase
+class AssignedSectionTest < ActiveSupport::TestCase
   fixtures :contents, :sections, :assigned_sections
 
   def test_should_not_allow_duplicate_assigned_sections

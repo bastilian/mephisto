@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'user_mailer'
 
-class UserMailerTest < Test::Unit::TestCase
+class UserMailerTest < ActiveSupport::TestCase
   include ActionController::UrlWriter
   fixtures :users
 

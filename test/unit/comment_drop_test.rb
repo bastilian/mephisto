@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class CommentDropTest < Test::Unit::TestCase
+class CommentDropTest < ActiveSupport::TestCase
   fixtures :contents, :sites
   
   def setup

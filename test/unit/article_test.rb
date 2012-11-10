@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class ArticleTest < Test::Unit::TestCase
+class ArticleTest < ActiveSupport::TestCase
   fixtures :contents, :users, :sections, :sites, :assigned_sections
 
   def test_find_next
@@ -183,7 +183,7 @@ class ArticleTest < Test::Unit::TestCase
     end
 end
 
-class ArticleFilterEditTest < Test::Unit::TestCase
+class ArticleFilterEditTest < ActiveSupport::TestCase
   fixtures :contents, :users, :sections, :sites
 
   def setup

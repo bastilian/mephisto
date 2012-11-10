@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class TimeTest < Test::Unit::TestCase
+class TimeTest < ActiveSupport::TestCase
   def test_should_show_year_delta
     assert_equal [Time.local(2006, 1, 1), Time.local(2007,1,1)-1], Time.local(2006,7,1).to_delta(:year)
   end

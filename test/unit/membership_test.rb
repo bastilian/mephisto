@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 # DEPRECATED, see spec/models/membership_spec.rb
 
-class MembershipTest < Test::Unit::TestCase
+class MembershipTest < ActiveSupport::TestCase
   fixtures :memberships, :users, :sites
 
   def test_should_find_user_sites

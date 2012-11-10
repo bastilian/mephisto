@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class CachedPageTest < Test::Unit::TestCase
+class CachedPageTest < ActiveSupport::TestCase
   fixtures :contents, :sites, :cached_pages
   
   def test_should_find_by_references
