@@ -15,7 +15,7 @@ module Mephisto
         # give the include tag access to files in the site's fragments directory
         ::Liquid::Template.file_system = ::Liquid::LocalFileSystem.new(File.join(@site.theme.path, 'templates'))
         tmpl = ::Liquid::Template.parse(template.read.to_s)
-        returning tmpl.render(assigns, :registers => {:controller => controller}) do |result|
+        tmpl.render(assigns, :registers => {:controller => controller}).tap do |result|
           yield tmpl, result if block_given?
         end
       end

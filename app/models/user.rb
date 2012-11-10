@@ -88,7 +88,7 @@ class User < ActiveRecord::Base
   end
 
   def reset_token!
-    returning self.token = rand_key do |t|
+    (self.token = rand_key).tap do |t|
       self.token_expires_at = 2.weeks.from_now.utc
       save!
     end

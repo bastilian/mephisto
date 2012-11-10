@@ -71,7 +71,7 @@ class Asset < ActiveRecord::Base
   end
 
   def public_filename_with_host(thumbnail = nil)
-    returning public_filename_without_host(thumbnail) do |s|
+    public_filename_without_host(thumbnail).tap do |s|
       s.gsub! /\A\/assets\/[^\/]+\//, "/assets/#{$1}" if Site.multi_sites_enabled
     end
   end

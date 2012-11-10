@@ -76,7 +76,7 @@ module ApplicationHelper
   end
 
   def sanitize_feed_content(html)
-    returning h(sanitize(html.strip)) do |html|
+    h(sanitize(html.strip)).tap do |html|
       html.gsub! /&amp;(#\d+);/ do |s|
         "&#{$1};"
       end

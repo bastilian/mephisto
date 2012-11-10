@@ -114,7 +114,7 @@ class Admin::AssetsController < Admin::BaseController
       end
       
       @search_conditions =
-        returning :conditions => [] do |options|
+        {:conditions => []}.tap do |options|
           options[:include] = []
           unless params[:q].blank?
             params[:conditions] = { :title => true, :tags => true } if params[:conditions].blank?

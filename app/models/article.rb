@@ -36,7 +36,7 @@ class Article < Content
   with_options :order => 'created_at', :class_name => 'Comment' do |comment|
     comment.has_many :comments,            :conditions => ['contents.approved = ?', true]  do
       def unapprove(id)
-        returning find(id) do |comment|
+        find(id).tap do |comment|
           comment.approved = false
           comment.save
         end
@@ -44,7 +44,7 @@ class Article < Content
     end
     comment.has_many :unapproved_comments, :conditions => ['contents.approved = ?', false] do
       def approve(id)
-        returning find(id) do |comment|
+        find(id).tap do |comment|
           comment.approved = true
           comment.save
         end
@@ -56,7 +56,7 @@ class Article < Content
   has_many :assigned_assets, :order => 'position', :dependent => :destroy
   has_many :assets, :through => :assigned_assets, :conditions => ['assigned_assets.active = ?', true], :select => 'assets.*, assigned_assets.label' do
     def add(asset, label = nil)
-      returning AssignedAsset.find_or_create_by_article_id_and_asset_id(proxy_owner.id, asset.id) do |aa|
+      AssignedAsset.find_or_create_by_article_id_and_asset_id(proxy_owner.id, asset.id).tap do |aa|
         aa.label  = label
         aa.active = true
         aa.save!

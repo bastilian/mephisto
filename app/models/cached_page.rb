@@ -53,7 +53,7 @@ class CachedPage < ActiveRecord::Base
     end
     
     def create_by_url(site, url, references)
-      returning find_or_initialize_by_site_id_and_url(site.id, url) do |page|
+      find_or_initialize_by_site_id_and_url(site.id, url).tap do |page|
         [:compact!, :flatten!, :uniq!].each { |m| references.send m }
         references.collect! { |r| r.respond_to?(:referenced_cache_key) ? r.referenced_cache_key : r }
         page.references = references.join

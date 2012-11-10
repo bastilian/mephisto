@@ -1,7 +1,7 @@
 # need to make pathname safe for windows!
 Pathname.class_eval do
   def read(*args)
-    returning [] do |s|
+    [].tap do |s|
       File.open(@path, 'rb') { |f| s << f.read }
     end.to_s
   end
@@ -33,10 +33,4 @@ ActiveRecord::Base.class_eval do
   end
 
   expiring_attr_reader :referenced_cache_key, '"[#{[id, self.class.name] * ":"}]"'
-end
-
-class Object
-  def tap
-    yield self; self;
-  end
 end

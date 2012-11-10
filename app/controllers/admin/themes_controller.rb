@@ -77,7 +77,7 @@ class Admin::ThemesController < Admin::BaseController
     end
 
     def temp_theme_path_for(prefix)
-      returning theme_export_path + "site-#{site.id}/#{prefix}#{Time.now.utc.to_i.to_s.split('').sort_by { rand }}" do |path|
+      (theme_export_path + "site-#{site.id}/#{prefix}#{Time.now.utc.to_i.to_s.split('').sort_by { rand }}").tap do |path|
         FileUtils.mkdir_p path unless path.exist?
       end
     end

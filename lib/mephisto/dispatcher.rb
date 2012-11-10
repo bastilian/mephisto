@@ -36,7 +36,7 @@ module Mephisto
 
       dispatch_type = :list
       section       = nil
-      returning [] do |result|
+      [].tap do |result|
         # look for the section in the path
         while section.nil? && path.any?
           section = site.sections.detect { |s| s.path == path.join('/') }
@@ -75,7 +75,7 @@ module Mephisto
       full_path = path.join('/')
       regex, variables = build_permalink_regex_with(site.permalink_style)
       if match = regex.match(full_path)
-        returning([{}]) do |result|
+        ([{}]).tap do |result|
           variables.each_with_index do |var, i|
             result.first[var] = match[i+1]
           end

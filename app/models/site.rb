@@ -45,7 +45,7 @@ class Site < ActiveRecord::Base
   has_many  :articles, :dependent => :destroy do
     def find_by_permalink(options)
       conditions = 
-        returning ["(contents.published_at IS NOT NULL AND contents.published_at <= ?)", Time.now.utc] do |cond|
+        ["(contents.published_at IS NOT NULL AND contents.published_at <= ?)", Time.now.utc].tap do |cond|
           if options[:year]
             from, to = Time.delta(options[:year], options[:month], options[:day])
             cond.first << ' AND (contents.published_at BETWEEN ? AND ?)'
@@ -232,7 +232,7 @@ class Site < ActiveRecord::Base
   def expire_cached_pages(controller, log_message, pages = nil)
     controller = controller.class unless controller.is_a?(Class)
     pages ||= cached_pages.find_current(:all)
-    returning cached_log_message_for(log_message, pages) do |msg|
+    cached_log_message_for(log_message, pages).tap do |msg|
       controller.logger.warn msg if cache_sweeper_tracing
       pages.each { |p| controller.expire_page(p.url) }
       CachedPage.expire_pages(self, pages)
