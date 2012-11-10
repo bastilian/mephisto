@@ -1,7 +1,7 @@
 # A sample Gemfile
 source "http://rubygems.org"
 
-gem "rails", '2.2.2'
+gem "rails", '2.3.14'
 gem 'rdoc'
 gem 'RedCloth', '3.0.4', :require => 'redcloth'
 gem 'BlueCloth', :require => 'bluecloth'
