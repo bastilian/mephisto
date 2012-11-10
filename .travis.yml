@@ -6,7 +6,7 @@ notifications:
   email:
     - sebastian.graessl@gmail.com
 script:
-	- time bundle exec rake
+  - time bundle exec rake
 before_script:
   - rake config/initializers/session_store.rb
   - mysql -e 'create database mephisto_test'
