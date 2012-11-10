@@ -1,18 +1,18 @@
 GIT
-  remote: https://github.com/emk/safe_erb.git
+  remote: git://github.com/emk/safe_erb.git
   revision: 59327ee8a18bbaa26c613aac5c6f1d9575aa6202
   specs:
     safe_erb (0.1.2)
 
 GIT
-  remote: https://github.com/notahat/machinist.git
+  remote: git://github.com/notahat/machinist.git
   revision: 47fa070c99ec96ede665a27bc9d1e205847a387d
   branch: 1.0-maintenance
   specs:
     machinist (1.0.6)
 
 GIT
-  remote: https://github.com/technoweenie/acts_as_versioned.git
+  remote: git://github.com/technoweenie/acts_as_versioned.git
   revision: 589289fd42b2600d5f643c85e3e4e38e03ac655e
   tag: rails_2
   specs:

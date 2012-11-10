@@ -10,11 +10,11 @@ gem 'liquid', '1.9.0'
 gem 'will_paginate', '~> 2.3.16'
 gem 'coderay'
 gem 'tzinfo', '>= 0.3.12'
-gem 'safe_erb', '>= 0.1.1', :git => 'https://github.com/emk/safe_erb.git'
+gem 'safe_erb', '>= 0.1.1', :git => 'git://github.com/emk/safe_erb.git'
 gem 'rubyzip'
 
 gem 'acts_as_list', '0.1.2'
-gem 'acts_as_versioned', :git => 'https://github.com/technoweenie/acts_as_versioned.git', :tag => 'rails_2'
+gem 'acts_as_versioned', :git => 'git://github.com/technoweenie/acts_as_versioned.git', :tag => 'rails_2'
 gem 'rubypants', '0.2.0'
 
 gem 'xml-simple'
@@ -27,7 +27,7 @@ end
 group :test do
   gem 'mysql'
   gem 'faker'
-  gem 'machinist', :git => "https://github.com/notahat/machinist.git", :branch => "1.0-maintenance"
+  gem 'machinist', :git => "git://github.com/notahat/machinist.git", :branch => "1.0-maintenance"
   gem 'mocha', :require => false
   gem 'ruby-debug'
   gem "rspec", "1.3.0"
