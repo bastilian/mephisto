@@ -23,7 +23,8 @@ class UserMailerTest < ActiveSupport::TestCase
     user = users(:quentin)
     response = UserMailer.deliver_forgot_password(user)
     assert_equal user.email, response.to[0]
-    assert_match /#{url_for :controller => 'account', :action => 'activate', :id => user.token}/, response.body
+    # TODO: make host dynamic
+    assert_match /#{url_for :host => 'localhost:3000', :controller => 'account', :action => 'activate', :id => user.token}/, response.body
   end
 
   private
