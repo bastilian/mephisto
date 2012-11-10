@@ -209,7 +209,7 @@ class ActiveSupport::TestCase
   
   # mocks a Liquid::Context
   def mock_context(assigns = {}, registers = {})
-    returning Liquid::Context.new(assigns, registers) do |context|
+    Liquid::Context.new(assigns, registers).tap do |context|
       assigns.keys.each { |k| context[k].context = context }
     end
   end
