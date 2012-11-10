@@ -9,7 +9,7 @@
 <% end %>
 
 <div id="general" class="setgroup">
-	<%= error_messages_for :site %>
+	<%= (error_messages_for :site).untaint %>
   <% form_for :site, :url => {:action => 'create'} do |f| %>
   <dl class="setform">
     <dt><label for="site_host">Host</label></dt>

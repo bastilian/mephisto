@@ -1,4 +1,4 @@
-<%= error_messages_for 'article' %>
+<%= (error_messages_for 'article').untaint %>
 <% @style = has_excerpt? ? "" : "display:none" %>
 <!-- begin required fields -->
 <div class="group">
@@ -21,8 +21,8 @@
   <dd><label><%= check_box_tag :draft, '1', !@article.new_record? && !@published, :id => 'article-draft' %> Yes, save this article as a draft.</label></dd>
   <dt id="publish-date-lbl"<%= %( style="display:none") unless @article.new_record? || @published -%>><%= label_tag 'article_created_at', 'Publish on this date:' %></dt>
   <dd id="publish-date"<%= %( style="display:none") unless @article.new_record? || @published -%>>
-    <%= form.datetime_select :published_at, 
-          :start_year => (@article.published_at || Time.now.utc).year-1, :end_year => (Time.now.utc.year + 5), :order => [:month, :day, :year] %>
+    <%= (form.datetime_select :published_at, 
+          :start_year => (@article.published_at || Time.now.utc).year-1, :end_year => (Time.now.utc.year + 5), :order => [:month, :day, :year]).untaint %>
   </dd>
 </dl>
 <!-- /end optional fields -->

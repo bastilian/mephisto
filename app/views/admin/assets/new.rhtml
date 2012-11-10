@@ -1,6 +1,6 @@
 <%= render :partial => "action_nav" %>
 <% form_for @asset, :html => { :multipart => true } do |f| %>
-  <%= error_messages_for :asset %>
+<%= (error_messages_for :asset).untaint %>
   <dl class="group" id="fileform">
     <dt id="filelbls">
       <label for="asset_data">Select files to upload</label>

@@ -1,6 +1,6 @@
 if @section.errors.any?  
   page.visual_effect :shake, 'section_name'
-  page.flash.errors error_messages_for(:section)
+  page.flash.errors error_messages_for(:section).untaint
 else
   page.flash.fade_error
   page.flash.notice "Section '#{h @section.name}' created."

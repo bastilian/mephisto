@@ -1,4 +1,4 @@
-  <%= error_messages_for :comment %>
+  <%= (error_messages_for :comment).untaint %>
   <% remote_form_for :comment, :url => article_comments_path(@article) do |form| %>
     <%= render :partial => 'form', :object => form %>
     <%= submit_tag "Create" %> or <%= link_to_function "hide", "$('new-comment-form').toggle()" %>

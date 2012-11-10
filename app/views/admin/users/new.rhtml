@@ -6,7 +6,7 @@
 <!-- /end action nav -->
 <% end %>
 
-<%= error_messages_for :user %>
+<%= (error_messages_for :user).untaint %>
 <% form_for :user, :url => { :action => 'create' } do |f| -%>
 <%= render :partial => 'form', :locals => { :f => f, :create  => true } %>
 <% end -%>

@@ -4,7 +4,7 @@
     <%= link_to asset_image_for(@asset, :thumb), @asset.public_filename %>
   </div>
 
-  <%= error_messages_for :asset %>
+  <%= (error_messages_for :asset).untaint %>
   <dl class="group">
     <dt><label for="asset_title">Title</label> <span class="hint">If you don't enter a title, we will use the filename instead.</span></dt>
     <dd><%= f.text_field :title %></dd>

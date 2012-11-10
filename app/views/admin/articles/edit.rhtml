@@ -6,7 +6,7 @@
   <% end %>
 <% end %>
 
-<%= error_messages_for :article %>
+<%= (error_messages_for :article).untaint %>
 
 <% content_for :form do -%>
   <%= form_tag({:action => 'update', :id => @article}, {:id => 'article-form', :multipart => true, :method => :put}) %>
