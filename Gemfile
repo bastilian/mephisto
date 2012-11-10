@@ -18,6 +18,8 @@ gem 'acts_as_list', '0.1.2'
 gem 'acts_as_versioned', :git => 'https://github.com/technoweenie/acts_as_versioned.git', :tag => 'rails_2'
 gem 'rubypants', '0.2.0'
 
+gem "rspec", "1.3.2"
+gem "rspec-rails", "1.3.4"
 group :development do
   gem 'unicorn'
   gem 'sqlite3'
@@ -28,6 +30,4 @@ group :test do
   gem 'faker'
   gem 'machinist'
   gem 'ruby-debug'
-  gem "rspec", "1.3.0"
-  gem "rspec-rails", "1.3.2"
 end
