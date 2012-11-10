@@ -8,7 +8,6 @@ gem 'BlueCloth', :require => 'bluecloth'
 gem 'rubyzip', :require => 'zip/zipfilesystem'
 gem 'liquid', '1.9.0'
 gem 'will_paginate', '~> 2.3.16'
-gem 'mocha'
 gem 'coderay'
 gem 'tzinfo', '>= 0.3.12'
 gem 'safe_erb', '>= 0.1.1', :git => 'https://github.com/emk/safe_erb.git'
@@ -29,6 +28,7 @@ group :test do
   gem 'mysql'
   gem 'faker'
   gem 'machinist', :git => "https://github.com/notahat/machinist.git", :branch => "1.0-maintenance"
+  gem 'mocha', :require => false
   gem 'ruby-debug'
   gem "rspec", "1.3.0"
   gem "rspec-rails", "1.3.2"

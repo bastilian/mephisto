@@ -377,3 +377,5 @@ begin
   Debugger.start
 rescue LoadError
 end
+
+require 'mocha'
