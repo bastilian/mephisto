@@ -84,7 +84,7 @@ class CommentDropTest < ActiveSupport::TestCase
   
   private
     def create_comment_stub(options)
-      returning stub(@mock_comment.merge(options)) do |stub|
+      stub(@mock_comment.merge(options)).tap do |stub|
         def stub.id() 55; end
       end
     end

@@ -177,7 +177,7 @@ class ArticleTest < ActiveSupport::TestCase
     end
     
     def create_fake_article(time = 5.days.ago.utc)
-      returning Article.new(:comment_age => 10, :published_at => time.utc) do |a|
+      Article.new(:comment_age => 10, :published_at => time.utc).tap do |a|
         def a.new_record?() false ; end
       end
     end
