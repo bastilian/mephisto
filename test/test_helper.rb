@@ -291,8 +291,9 @@ class ActionController::Integration::Session
   end
 
   def assert_redirected_to(url)
+    # raise headers.inspect
     assert redirect?
-    assert_equal url, interpret_uri(headers["location"].first)
+    assert_equal url, interpret_uri(headers["location"])
   end
 
   def assert_redirected_to!(url)

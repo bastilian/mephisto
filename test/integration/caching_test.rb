@@ -393,7 +393,7 @@ class CachingTest < ActionController::IntegrationTest
       visit do |v| 
         v.get '/redirect/external'
         assert v.redirect?
-        assert_equal 'http://external', v.headers["location"].first
+        assert_equal 'http://external', v.headers["location"]
       end
     end
   end
