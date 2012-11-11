@@ -33,19 +33,8 @@ end
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence those specified here
-  
-  # Skip frameworks you're not going to use
-  config.frameworks -= [ :active_resource ]
 
   config.autoload_paths += %W( #{RAILS_ROOT}/app/cachers #{RAILS_ROOT}/app/drops #{RAILS_ROOT}/app/filters )
-
-  # This gem is a lightly-patched, in-tree version of rubypants.  The
-  # upstream gem was last released in 2004, and needs to be repackaged
-  # before we can treat it like a normal gem.
-  config.autoload_paths += %W( #{RAILS_ROOT}/vendor/rubypants-0.2.0/lib )
-  
-  # NFI why this is here.  find and eradicate the bug.
-  config.autoload_paths += %W( #{RAILS_ROOT}/vendor/rails/actionwebservice/lib )
 
   # Force all environments to use the same logger level 
   # (by default production uses :info, the others :debug)
