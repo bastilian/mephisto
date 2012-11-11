@@ -104,7 +104,7 @@ class MephistoController < ApplicationController
       end
 
       @articles = site.articles.paginate(:conditions => conditions, :order => 'published_at DESC',
-                                         :include => [:user, :sections],
+                                         :joins => [:user, :sections],
                                          :per_page => site.articles_per_page, :page => params[:page])
       
       render_liquid_template_for(:search, 'articles'      => @articles,
