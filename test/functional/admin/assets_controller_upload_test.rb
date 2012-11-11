@@ -49,7 +49,7 @@ class Admin::AssetsControllerUploadTest < ActionController::TestCase
     process_upload ['logo.png']
     post :update, :id => Asset.find(:first).id, :asset => { :title => 'foo bar' }
     assert_redirected_to assets_path
-    assert_valid assigns(:asset)
+    assert assigns(:asset).valid?
     assert_equal 'foo bar', assigns(:asset).title
   end
 

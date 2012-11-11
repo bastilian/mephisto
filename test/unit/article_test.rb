@@ -150,7 +150,7 @@ class ArticleTest < ActiveSupport::TestCase
     a = nil
     assert_difference Tagging, :count, 2 do
       a = create_article :tag => 'ruby, rails', :body => 'foo'
-      assert_valid a
+      assert a.valid?
     end
     assert_equal 'rails, ruby', a.reload.tag
   end

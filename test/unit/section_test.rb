@@ -20,7 +20,7 @@ class SectionTest < ActiveSupport::TestCase
   end
 
   def test_should_not_allow_nil_path
-    assert_valid sections(:home)
+    assert sections(:home).valid?
     sections(:home).path = nil
     assert !sections(:home).valid?
     assert sections(:home).errors.on(:path)
@@ -28,7 +28,7 @@ class SectionTest < ActiveSupport::TestCase
 
   def test_should_create_path
     s = Section.new :site => sites(:first), :name => 'This IS a Tripped out title!!!1  (well/ not. really)', :path => ''
-    assert_valid s
+    assert s.valid?
     assert_equal 'this-is-a-tripped-out-title-1-well/-not-really', s.path
   end
 

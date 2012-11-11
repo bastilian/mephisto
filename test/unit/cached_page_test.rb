@@ -19,7 +19,7 @@ class CachedPageTest < ActiveSupport::TestCase
     assert_difference CachedPage, :count do
       assert_difference sites(:first).cached_pages, :count do
         page = CachedPage.create_by_url(sites(:first), '/blah', [contents(:welcome)])
-        assert_valid page
+        assert page.valid?
         assert_equal '/blah', page.url
         assert_equal "[1:Article]", page.references
       end
@@ -30,7 +30,7 @@ class CachedPageTest < ActiveSupport::TestCase
     assert_no_difference CachedPage, :count do
       assert_no_difference sites(:first).cached_pages, :count do
         page = CachedPage.create_by_url(sites(:first), '/bar', [contents(:welcome)])
-        assert_valid page
+        assert page.valid?
         assert_equal '/bar', page.url
         assert_equal "[1:Article]", page.references
         assert_equal cached_pages(:first_cleared), page

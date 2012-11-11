@@ -85,7 +85,7 @@ class AdminArticlesControllerAssetsTest < ActionController::TestCase
           'published_at(1i)' => '2005', 'published_at(2i)' => '1', 'published_at(3i)' => '1', 'published_at(4i)' => '10' }, :submit => :save
         assert_response :success
         assert_template 'new'
-        assert_valid assigns(:article)
+        assert assigns(:article).valid?
         assert assigns(:article).new_record?
         assert_equal Time.local(2005, 1, 1, 9, 0, 0).utc, assigns(:article).published_at
         assert_equal users(:quentin), assigns(:article).updater

@@ -10,7 +10,7 @@ class SitePermalinkValidationsTest < ActiveSupport::TestCase
   
   test "should strip ending and beginning slashes" do
     @site.permalink_style = '/:year/:month/:day/:permalink/'
-    assert_valid @site
+    assert @site.valid?
     assert_equal ':year/:month/:day/:permalink', @site.permalink_style
   end
   
@@ -36,7 +36,7 @@ class SitePermalinkValidationsTest < ActiveSupport::TestCase
   
   test "should require valid attributes" do
     @site.permalink_style = ':year/:month/:day/:permalink/:id'
-    assert_valid @site
+    assert @site.valid?
 
     @site.permalink_style = ':year/:foo/:month/:day/:permalink'
     assert !@site.valid?
@@ -73,13 +73,13 @@ class SitePermalinkGenerationTest < ActiveSupport::TestCase
 
   test "should generate custom id permalink" do
     @site.permalink_style = 'posts/:year/:id'
-    assert_valid @site
+    assert @site.valid?
     assert_equal "/posts/#{@article.year}/#{@article.id}", @site.permalink_for(@article)
   end
 
   test "should generate custom id permalink with comment" do
     @site.permalink_style = 'posts/:year/:id'
-    assert_valid @site
+    assert @site.valid?
     assert_equal "/posts/#{@article.year}/#{@article.id}", @site.permalink_for(contents(:welcome_comment))
   end
 end

@@ -147,10 +147,6 @@ class ActiveSupport::TestCase
     assert_equal 1, get_xpath(%{/feed[count(child::entry)=#{entries}]}).size, "Atom 1.0 feed has wrong number of feed/entry nodes"
   end
 
-  def assert_valid(record)
-    assert record.valid?, record.errors.full_messages.join("\n") 
-  end
-
   # Sets the current user in the session from the user fixtures.
   def login_as(user, site = nil)
     user = user ? users(user) : nil

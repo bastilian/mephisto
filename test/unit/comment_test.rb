@@ -22,7 +22,7 @@ class CommentTest < ActiveSupport::TestCase
     old_times = contents(:welcome).comments.collect &:updated_at
     comment = contents(:welcome).comments.create :body => 'test comment', :author => 'bob', :author_ip => '127.0.0.1'
     assert_equal 'textile_filter', comment.filter
-    assert_valid comment
+    assert comment.valid?
     assert_equal old_times, contents(:welcome).comments(true).collect(&:updated_at)
   end
 
@@ -30,7 +30,7 @@ class CommentTest < ActiveSupport::TestCase
     old_times = contents(:welcome).comments.collect &:updated_at
     comment = contents(:welcome).comments.create :body => 'test comment', :author => 'bob', :author_ip => '127.0.0.1'
     comment.filter = 'markdown_filter'
-    assert_valid comment
+    assert comment.valid?
     assert_equal old_times, contents(:welcome).comments(true).collect(&:updated_at)
   end
 
@@ -79,19 +79,19 @@ class CommentTest < ActiveSupport::TestCase
     comments = contents(:welcome).comments
     options = {:body => 'test', :author => 'bob', :author_ip => '127.0.0.1'}
     comment = comments.build options.merge(:author_email => '   bob@example.com   ')
-    assert_valid comment
+    assert comment.valid?
     assert_equal 'bob@example.com', comment.author_email
     comment = comments.build options.merge(:author_url => '   ')
-    assert_valid comment
+    assert comment.valid?
     assert_equal '', comment.author_url
     comment = comments.build options.merge(:author_url => ' /foo ')
-    assert_valid comment
+    assert comment.valid?
     assert_equal '/foo', comment.author_url
     comment = comments.build options.merge(:author_url => '  http://example.com  ')
-    assert_valid comment
+    assert comment.valid?
     assert_equal 'http://example.com', comment.author_url
     comment = comments.build options.merge(:author_url => '  example.com  ')
-    assert_valid comment
+    assert comment.valid?
     assert_equal 'http://example.com', comment.author_url
   end
 
@@ -99,7 +99,7 @@ class CommentTest < ActiveSupport::TestCase
     comments = contents(:welcome).comments
     options = {:body => 'test', :author => 'bob', :author_ip => '127.0.0.1'}
     comment = comments.build options.merge(:author_email => 'bob@example.com')
-    assert_valid comment
+    assert comment.valid?
     comment = comments.build options.merge(:author_email => 'bobexample.com')
     assert !comment.valid?
     comment = comments.build options.merge(:author_email => 'bob@example')
