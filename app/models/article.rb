@@ -1,6 +1,6 @@
 class Article < Content
   class CommentNotAllowed < StandardError; end
-    
+  extend Unscoped
   validates_presence_of :title, :user_id, :site_id
 
   before_validation { |record| record.set_default_filter! }
@@ -12,7 +12,7 @@ class Article < Content
   acts_as_versioned :if_changed => [:title, :body, :excerpt], :limit => 5 do
     def self.included(base)
       base.send :include, Mephisto::TaggableMethods
-      base.belongs_to :updater, :class_name => '::User', :foreign_key => 'updater_id', :with_deleted => true
+      base.belongs_to :updater, :class_name => '::User', :foreign_key => 'updater_id'
       [:year, :month, :day].each { |m| base.delegate m, :to => :published_at }
     end
 
@@ -67,6 +67,9 @@ class Article < Content
       AssignedAsset.update_all ['active = ?', false], ['article_id = ? AND asset_id = ?', proxy_owner.id, asset.id]
     end
   end
+
+  belongs_to :user
+  unscope    :user
 
   class << self
     def with_published(&block)

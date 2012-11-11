@@ -73,7 +73,7 @@ class Site < ActiveRecord::Base
   has_many  :assets, :order => 'created_at desc', :conditions => 'parent_id is null', :dependent => :destroy
 
   has_many :memberships, :dependent => :destroy
-  has_many :members, :through => :memberships, :source => :user
+  has_many :members, :through => :memberships, :source => :user, :conditions => {:deleted_at => nil}
   has_many :admins,  :through => :memberships, :source => :user, :conditions => ['memberships.admin = ? or users.admin = ?', true, true]
 
   before_validation :downcase_host
@@ -114,7 +114,7 @@ class Site < ActiveRecord::Base
   end
   
   def user_with_deleted(id)
-    User.find_by_site_with_deleted self, id
+    User.find_with_deleted(id)
   end
 
   def user_by_token(token)

@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   @@membership_options = {:select => 'distinct users.*, memberships.admin as site_admin', :order => 'users.login',
     :joins => 'left outer join memberships on users.id = memberships.user_id'}
 
+  default_scope :conditions => {:deleted_at => nil}
+
   # Virtual attribute for the unencrypted password
   attr_accessor :password
   
@@ -21,7 +23,6 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
 
   has_many :articles
-  acts_as_paranoid
 
   has_many :memberships, :dependent => :destroy
   has_many :sites, :through => :memberships, :order => 'title, host'
@@ -39,20 +40,37 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_site(site, id)
-    with_deleted_scope { find_by_site_with_deleted(site, id) }
+    self.find_by_site_with_deleted(site, id)
   end
 
-  def self.find_by_site_with_deleted(site, id)
-    find_with_deleted(:first, @@membership_options.merge(
-      :conditions => ['users.id = ? and (memberships.site_id = ? or users.admin = ?)', id, site.id, true]))
+  def self.find_by_site_with_deleted(site, id, with_deleted=nil)
+    if with_deleted
+      self.with_exclusive_scope { self.find(:first, @@membership_options.merge(
+            :conditions => ['users.id = ? and (memberships.site_id = ? or users.admin = ?)', id, site.id, true])) }
+    else
+      self.find_by_site_without_deleted(site, id)
+    end
+  end
+
+  def self.find_by_site_without_deleted(site, id)
+    self.find(:first, @@membership_options.merge(
+          :conditions => ['users.id = ? and (memberships.site_id = ? or users.admin = ?)', id, site.id, true]))
+  end
+
+  def self.find_with_deleted(id)
+    self.with_exclusive_scope { User.find(id) }
+  end
+
+  def self.count_with_deleted
+    self.with_exclusive_scope { User.count(:all) }
   end
 
   def self.find_all_by_site(site, options = {})
-    with_deleted_scope { find_all_by_site_with_deleted(site, options) }
+    find(:all, @@membership_options.merge(options.reverse_merge(:conditions => ['memberships.site_id = ? or users.admin = ?', site.id, true]))).uniq
   end
 
   def self.find_all_by_site_with_deleted(site, options = {})
-    find_with_deleted(:all, @@membership_options.merge(options.reverse_merge(:conditions => ['memberships.site_id = ? or users.admin = ?', site.id, true]))).uniq
+    self.with_exclusive_scope { self.find_all_by_site(site, options) }
   end
 
   def self.find_by_token(site, token)
@@ -96,6 +114,10 @@ class User < ActiveRecord::Base
 
   def to_liquid
     UserDrop.new self
+  end
+
+  def destroy
+    self.update_attribute(:deleted_at, Time.now)
   end
 
   protected
