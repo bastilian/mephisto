@@ -54,7 +54,7 @@ class Asset < ActiveRecord::Base
   # except :uploaded_data against mass assignment.  Rick says this is to
   # make us think through our security policy.  Historically, Mephisto has
   # made at least the following set of attributes accessible.
-  attr_accessible :title, :filename, :content_type, :size, :tag
+  attr_accessible :title, :filename, :content_type, :size, :tag, :uploaded_data
 
   # TODO - This is even more dubious than the other accessible attrs, but
   # it's how Mephisto has historically worked.
