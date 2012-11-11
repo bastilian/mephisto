@@ -17,7 +17,6 @@ class MephistoController < ApplicationController
       # @section is the http status
       # @dispatch_path.first has the headers
       if @dispatch_path.first.is_a?(Hash)
-        response.headers['Status'] = interpret_status @section
         redirect_to @dispatch_path.first[:location], :status=>301
       else
         head @section
