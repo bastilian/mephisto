@@ -23,8 +23,8 @@ group :test do
   gem 'faker'
   gem 'machinist', :git => "git://github.com/notahat/machinist.git", :branch => "1.0-maintenance"
   gem 'mocha', :require => false
-  gem 'ruby-debug19'
+  # gem 'ruby-debug19'
   gem "rspec", "1.3.0"
   gem "rspec-rails", "1.3.2"
-  gem 'test-unit', '1.2.3'
+  gem 'test-unit'
 end
