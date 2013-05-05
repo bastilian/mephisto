@@ -34,27 +34,27 @@ class Admin::ResourcesControllerTest < ActionController::TestCase
   def test_should_require_resource_id
     login_as :quentin
     get :edit
-    assert_redirected_to :action => 'index'
+    assert_redirected_to :controller => 'admin/design', :action => 'index'
     assert flash[:error]
   end
   
   def test_should_require_resource_id_on_update
     login_as :quentin
     post :update
-    assert_redirected_to :action => 'index'
+    assert_redirected_to :controller => 'admin/design', :action => 'index'
     assert flash[:error]
   end
 
   def test_should_require_posted_resource
     login_as :quentin
     get :update, :filename => 'style.css', :data => 'foo'
-    assert_redirected_to :action => 'index'
+    assert_redirected_to :controller => 'resources', :action => 'index'
   end
   
   def test_should_require_posted_resource_on_update
     login_as :quentin
     post :update, :filename => 'style.css'
-    assert_redirected_to :action => 'edit'
+    assert_redirected_to :controller => 'resources', :action => 'edit'
     assert flash[:error]
   end
 
