@@ -1,4 +1,4 @@
-require 'spec_helper'
+require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Mephisto::Liquid::UrlMethods, "#absolute_url" do
   include Mephisto::Liquid::UrlMethods

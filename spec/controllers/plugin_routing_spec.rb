@@ -7,7 +7,7 @@
 #   ["#{RAILS_ROOT}/vendor/plugins", "#{RAILS_ROOT}/vendor/plugins/engines_config/test/plugins"]
 # end
 # 
-# require 'spec_helper'
+# require File.dirname(__FILE__) + '/../spec_helper'
 # 
 # describe "Mephisto::Plugin routing" do
 #   controller_name 'mephisto'
