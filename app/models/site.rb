@@ -126,7 +126,7 @@ class Site < ActiveRecord::Base
   end
 
   def tags
-    Tag.find(:all, :select      => "DISTINCT tags.name",
+    Tag.find(:all, :select      => "DISTINCT tags.name, tags.id",
                    :joins       => "INNER JOIN taggings ON taggings.tag_id = tags.id INNER JOIN contents ON (taggings.taggable_id = contents.id AND 
                                     taggings.taggable_type = 'Content')",
                    :conditions  => ['contents.type = ? AND contents.site_id = ?', 'Article', id],
