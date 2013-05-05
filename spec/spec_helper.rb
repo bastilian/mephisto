@@ -1,11 +1,16 @@
-ENV["RAILS_ENV"] = "test"
+ENV["RAILS_ENV"] ||= "test"
 
-require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
+require_relative "../config/environment"
+
+MissingSourceFile::REGEXPS << [/^cannot load such file -- (.+)$/i, 1]
+
 require 'spec'
 require 'spec/rails'
 require 'ruby-debug'
 require 'machinist'
-require File.join(File.dirname(__FILE__), 'blueprints')
+require_relative 'blueprints'
+
+
 
 Spec::Runner.configure do |config|
   config.use_transactional_fixtures = true
