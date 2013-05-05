@@ -1,12 +1,3 @@
-# need to make pathname safe for windows!
-Pathname.class_eval do
-  def read(*args)
-    [].tap do |s|
-      File.open(@path, 'rb') { |f| s << f.read }
-    end.to_s
-  end
-end
-
 Symbol.class_eval do
   def to_liquid
     to_s
