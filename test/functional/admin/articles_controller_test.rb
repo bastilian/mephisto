@@ -236,7 +236,7 @@ class Admin::ArticlesControllerTest < ActionController::TestCase
       :title => "My Red Hot Car", :excerpt => "Blah Blah", :body => "Blah Blah",
       :section_ids => [sections(:home), sections(:about)].map { |s| s.id.to_s } }, :commit => 'Apply changes and keep editing'
 
-    assert @response.body.grep(/Flash\.notice/)
+    assert @response.body.lines.grep(/Flash\.notice/)
   end 
 
   def test_should_create_new_article_with_default_comment_age
