@@ -363,14 +363,14 @@ class MephistoControllerTest < ActionController::TestCase
 
   def test_should_reject_get_request_to_comments
     date      = contents(:welcome).published_at
-    permalink = "#{date.year}/#{date.month}/#{date.day}/welcome-to-mephisto"
+    permalink = "/#{date.year}/#{date.month}/#{date.day}/welcome-to-mephisto"
     dispatch "#{permalink}/comments"
     assert_redirected_to permalink
   end
 
   def test_should_reject_bad_post_request_to_comments
     date      = contents(:welcome).published_at
-    permalink = "#{date.year}/#{date.month}/#{date.day}/welcome-to-mephisto"
+    permalink = "/#{date.year}/#{date.month}/#{date.day}/welcome-to-mephisto"
     dispatch "#{permalink}/comments", :method => :post
     assert_redirected_to permalink
   end
