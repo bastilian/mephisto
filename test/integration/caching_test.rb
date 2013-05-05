@@ -346,7 +346,7 @@ class CachingTest < ActionController::IntegrationTest
   def test_should_expire_resource_when_updating_resource
     visitor = visit
     assert_caches_page '/images/rails-logo.png' do
-      visitor.read '/images/rails-logo.png'
+      get '/images/rails-logo.png'
     end
     
     assert_expires_page 'images/rails-logo.png' do
@@ -359,7 +359,7 @@ class CachingTest < ActionController::IntegrationTest
   def test_should_expire_resource_when_removing_resource
     visitor = visit
     assert_caches_page '/images/rails-logo.png' do
-      visitor.read '/images/rails-logo.png'
+      get '/images/rails-logo.png'
     end
     
     assert_expires_page 'images/rails-logo.png' do
