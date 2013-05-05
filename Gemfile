@@ -9,7 +9,7 @@ gem 'rubyzip', :require => 'zip/zipfilesystem'
 gem 'liquid'
 gem 'will_paginate', '~> 2.3.16'
 gem 'coderay'
-gem 'tzinfo', '>= 0.3.12'
+gem 'tzinfo'
 gem 'rubyzip'
 
 gem 'acts_as_list', '0.1.2'
