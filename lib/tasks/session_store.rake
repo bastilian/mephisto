@@ -13,8 +13,8 @@ file 'config/initializers/session_store.rb' do
 # secret is at least 30 characters and all random, no regular words or
 # you'll be exposed to dictionary attacks.
 ActionController::Base.session = {
-  :session_key => '_mephisto_session_2',
-  :secret      => '#{ActiveSupport::SecureRandom.hex(40)}'
+  :key    => '_mephisto_session_2',
+  :secret => '#{ActiveSupport::SecureRandom.hex(40)}'
 }
 EOD
   end
