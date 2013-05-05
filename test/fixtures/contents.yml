@@ -160,7 +160,7 @@ at_beginning_of_month:
   permalink: at-beginning-of-the-month
   body: Lalala
   body_html: Lalala
-  created_at: <%= date = Time.now.utc.beginning_of_month.advance(:months => -2).to_s(:db) %>
+  created_at: <%= date = Time.now.utc.beginning_of_month.advance(:months => -1).to_s(:db) %>
   updated_at: <%= date %>
   published_at: <%= date %>
   comment_age: 30
@@ -199,7 +199,7 @@ at_beginning_of_next_month:
   permalink: at-beginning-of-next-month
   body: Lalala
   body_html: Lalala
-  created_at: <%= date = Time.now.utc.beginning_of_month.advance(:months => -1, :minutes => 2).to_s(:db) %>
+  created_at: <%= date = Time.now.utc.end_of_month.advance(:months => -1, :minutes => 2).to_s(:db) %>
   updated_at: <%= date %>
   published_at: <%= date %>
   comment_age: 30
@@ -212,7 +212,7 @@ article_1_only_in_page_section:
   permalink: article-1
   body: Lalala
   body_html: Lalala
-  created_at: <%= date = Time.now.utc.beginning_of_month.advance(:months => -1, :minutes => 1).to_s(:db) %>
+  created_at: <%= date = Time.now.utc.beginning_of_month.advance(:months => -1, :minutes => 1, :days => 2).to_s(:db) %>
   updated_at: <%= date %>
   published_at: <%= date %>
   comment_age: 30
@@ -225,7 +225,7 @@ article_2_only_in_page_section:
   permalink: article-2
   body: Lalala
   body_html: Lalala
-  created_at: <%= date = Time.now.utc.beginning_of_month.advance(:months => -1).to_s(:db) %>
+  created_at: <%= date = Time.now.utc.beginning_of_month.advance(:months => -1, :days => 1).to_s(:db) %>
   updated_at: <%= date %>
   published_at: <%= date %>
   comment_age: 30
