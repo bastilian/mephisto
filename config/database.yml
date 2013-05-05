@@ -1,6 +1,8 @@
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
+  adapter: mysql
+  host: localhost
+  database: mephisto_development
+  user: root
 
 test:
   adapter: mysql

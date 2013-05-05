@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'spec_helper'
 
 # Verify that our readonly_record patches are working.
 describe "Any record" do

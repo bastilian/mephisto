@@ -25,7 +25,8 @@ class ExistingThemeResourcesTest < ActiveSupport::TestCase
   test "should add and create resource" do
     f = sites(:hostess).resources.write 'foo.css', 'foo'
     assert_equal (sites(:hostess).attachment_path + 'stylesheets/foo.css'), f
-    assert_equal 'foo', f.read
+
+    assert_equal 'foo', File.read(f)
     assert f.file?
   end
 end
