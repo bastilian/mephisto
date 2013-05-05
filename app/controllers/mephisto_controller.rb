@@ -34,7 +34,6 @@ class MephistoController < ApplicationController
         @article = @dispatch_path.empty? ? @section.articles.find_by_position : @section.articles.find_by_permalink(@dispatch_path.first)
       end
       show_404 and return unless @article
-      Mephisto::Liquid::CommentForm.article = @article
       render_liquid_template_for(:page, 'section' => @section.to_liquid(true),
                                         'article' => @article.to_liquid(:mode => :single, :page => @dispatch_path.empty?))
     end
@@ -147,7 +146,6 @@ class MephistoController < ApplicationController
     def show_article_with(assigns = {})
       find_article if @article.nil?
       show_404 and return unless @article || find_article
-      Mephisto::Liquid::CommentForm.article = @article
       @article = @article.to_liquid(:mode => :single)
       render_liquid_template_for(:single, assigns.update('articles' => [@article], 'article' => @article))
     end

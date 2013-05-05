@@ -1,18 +1,10 @@
 module Mephisto
   module Liquid
     class CommentForm < ::Liquid::Block
-      def self.article
-        Thread.current[:comment_form_article]
-      end
-      
-      def self.article=(value)
-        Thread.current[:comment_form_article] = value
-      end
-    
       # Provides the required input, error, and form fields
       # TODO: make this more accessible to users (let them mess it up, rather than forcing a structure on them)
       def render(context)
-        return '' unless self.class.article.accept_comments?
+        return '' unless context['article']['accept_comments']
         result = []
         context.stack do
           if context['message'].blank? 
@@ -29,7 +21,7 @@ module Mephisto
               'submit' => %(<input type="submit" value="Send" />)
             }
             
-            result << %(<form id="comment-form" method="post" action="#{context['article'].url}/comments#comment-form">#{[errors]+render_all(@nodelist, context)}</form>)
+            result << %(<form id="comment-form" method="post" action="#{context['article'].url}/comments#comment-form">#{errors+render_all(@nodelist, context)}</form>)
           else
             result << %(<p id="comment-message">#{context['message']}</p>)
           end
