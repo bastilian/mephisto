@@ -1,14 +1,10 @@
 language: ruby
 rvm:
-  - 1.8.7
-  - ree
   - 1.9.3
 notifications:
   email:
     - sebastian.graessl@gmail.com
-script:
-  - time bundle exec rake
 before_script:
   - rake config/initializers/session_store.rb
   - mysql -e 'create database mephisto_test'
-  - RAILS_ENV=test bundle exec rake --trace db:schema:load db:migrate
+  - RAILS_ENV=test bundle exec rake db:schema:load db:migrate
