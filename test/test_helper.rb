@@ -246,7 +246,7 @@ class ActiveSupport::TestCase
     to_test_param = lambda { |r| "<#{r.class}:#{r.to_param}>" }
     full_message = build_message(message, "<?> expected but was\n<?>.\n", 
       expected_models.collect(&to_test_param), actual_models.collect(&to_test_param))
-    assert_block(full_message) { expected_models == actual_models }
+    assert_block(full_message) { (expected_models-actual_models).empty? }
   end
 end
 
