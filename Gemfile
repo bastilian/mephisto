@@ -18,13 +18,14 @@ gem 'rubypants', '0.2.0'
 
 gem 'xml-simple'
 
+gem 'mysql'
+gem 'sqlite3'
+
 group :development do
   gem 'unicorn'
-  gem 'sqlite3'
 end
 
 group :test do
-  gem 'mysql'
   gem 'faker'
   gem 'machinist', :git => "git://github.com/notahat/machinist.git", :branch => "1.0-maintenance"
   gem 'mocha', :require => false
