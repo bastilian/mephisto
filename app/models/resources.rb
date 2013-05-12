@@ -1,3 +1,4 @@
+#encoding: UTF-8
 class Resources < Attachments
   @@non_image_extnames = %w(.js .css)
   cattr_reader :non_image_extnames

@@ -1,3 +1,4 @@
+#encoding: UTF-8
 class AssetsController < ApplicationController
 
   caches_page_with_references :show
@@ -9,10 +10,10 @@ class AssetsController < ApplicationController
     if !resource.file?
       show_404
     elsif site.resources.image?(file)
-      send_data resource.read, :filename => resource.basename.to_s, :type => content_type, :disposition => 'inline'
+      send_data resource.read.encode!('UTF-8', 'UTF-8', :invalid => :replace), :filename => resource.basename.to_s, :type => content_type, :disposition => 'inline'
     else
       headers['Content-Type'] = content_type
-      render :text => resource.read
+      render :text => resource.read.encode!('UTF-8', 'UTF-8', :invalid => :replace)
     end
   end
 end

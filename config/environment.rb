@@ -1,3 +1,4 @@
+#encoding: UTF-8
 Encoding.default_external = Encoding.default_internal = Encoding::UTF_8
 # Be sure to restart your web server when you modify this file.
 
