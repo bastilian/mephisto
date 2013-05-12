@@ -1,9 +1,11 @@
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
+  adapter: mysql2
+  host: localhost
+  database: mephisto_development
+  user: root
 
 test:
-  adapter: mysql
+  adapter: mysql2
   host: localhost
   database: mephisto_test
   user: root
