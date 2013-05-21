@@ -18,8 +18,7 @@ gem 'rubypants', '0.2.0'
 
 gem 'xml-simple'
 
-gem 'mysql2'
-gem 'activerecord-mysql2-adapter'
+gem 'mysql2', '<= 0.2.6'
 gem 'sqlite3'
 
 group :development do
