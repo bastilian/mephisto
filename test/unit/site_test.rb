@@ -1,5 +1,7 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
+
 class SiteTest < ActiveSupport::TestCase
+
   fixtures :sites, :contents, :sections
 
   test "should create site without accepting comments" do
