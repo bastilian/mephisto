@@ -6,7 +6,7 @@ Forked & revived by [Sebastian Gräßl][5]
 ## Installation
 
 1. Clone the repository
-   <pre><code>git@github.com:bastilian/mephisto.git</code></pre>
+   <pre><code>git clone git@github.com:bastilian/mephisto.git</code></pre>
 
 2. Initialize and update git-submodules, run Bundler in your working copy
    <pre><code>cd mephisto && git submodule init && git submodule update && bundle</pre></code>
