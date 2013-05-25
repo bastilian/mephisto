@@ -9,6 +9,7 @@ Capfile
 config/deploy.rb
 config/initializers/session_store.rb
 db/*.sqlite3
+config/database.yml
 log/*.log
 public/assets
 public/cache
