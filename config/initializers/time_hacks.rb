@@ -4,7 +4,7 @@ module ActiveSupport::CoreExtensions::Time::Conversions
   def to_ordinalized_s(format = :default)
     format = ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS[format] 
     return to_default_s if format.nil?
-    strftime(format.gsub(/%d/, '_%d_')).gsub(/_(\d+)_/) { |s| s.to_i.ordinalize }
+    strftime(format.gsub(/%d/, '_%d_')).gsub(/_(\d+)_/) { |s| s.delete('_').to_i.ordinalize }
   end
 end
 
