@@ -2,6 +2,7 @@
 .rake_tasks
 .powconfig
 .rbenv-version
+.ruby-version
 .powrc
 .rvmrc
 coverage
