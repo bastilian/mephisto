@@ -3,7 +3,7 @@ source "http://rubygems.org"
 gem "rails", '2.3.18'
 gem 'rdoc'
 gem 'RedCloth', '3.0.4', :require => 'redcloth'
-gem 'BlueCloth', :require => 'bluecloth'
+gem 'rdiscount'
 gem 'rubyzip', :require => 'zip/zipfilesystem'
 gem 'liquid'
 gem 'will_paginate', '~> 2.3.16'

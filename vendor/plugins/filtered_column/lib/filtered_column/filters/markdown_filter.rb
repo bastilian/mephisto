@@ -1,4 +1,5 @@
-require 'bluecloth'
+require 'rdiscount'
+BlueCloth = RDiscount
 module FilteredColumn
   module Filters
     class MarkdownFilter < Base
