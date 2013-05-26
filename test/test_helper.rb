@@ -129,11 +129,11 @@ class ActiveSupport::TestCase
 
   def get_xpath(xpath)
     if @rexml.nil?
-      @rexml = REXML::Document.new(@response.body)
+      @rexml = Nokogiri.XML(@response.body)
       assert @rexml
     end
  
-    REXML::XPath.match(@rexml, xpath)
+    @rexml.xpath(xpath)
   end
  
   def assert_xpath(xpath, msg=nil)
@@ -145,7 +145,7 @@ class ActiveSupport::TestCase
   end
 
   def assert_atom_entries_size(entries)
-    assert_equal 1, get_xpath(%{/feed[count(child::entry)=#{entries}]}).size, "Atom 1.0 feed has wrong number of feed/entry nodes"
+    assert_equal entries, get_xpath('/xmlns:feed/xmlns:entry').size, "Atom 1.0 feed has wrong number of feed/entry nodes"
   end
 
   # Sets the current user in the session from the user fixtures.

@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 
 gem "rails", '2.3.18'
+gem 'nokogiri'
 gem 'rdoc'
 gem 'RedCloth', :require => 'redcloth'
 gem 'rdiscount'
@@ -14,8 +15,6 @@ gem 'rubyzip'
 gem 'acts_as_list', '0.1.2'
 gem 'acts_as_versioned', :git => 'git://github.com/technoweenie/acts_as_versioned.git', :tag => 'rails_2'
 gem 'rubypants', '0.2.0'
-
-gem 'xml-simple'
 
 gem 'mysql2', '<= 0.2.6'
 gem 'unicorn'
