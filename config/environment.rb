@@ -25,9 +25,10 @@ module Gem
   end
 end
 
-require 'coveralls'
-Coveralls.wear!('rails')
-
+if ENV["RAILS_ENV"] == "test"
+  require 'coveralls'
+  Coveralls.wear!('rails')
+end
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 require File.join(File.dirname(__FILE__), '../vendor/plugins/engines/boot')
