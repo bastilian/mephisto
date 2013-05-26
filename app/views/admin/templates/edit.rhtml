@@ -17,7 +17,7 @@
   :attachment => @tmpl,
   :title      => @tmpl.basename.to_s,
   :hint       => 'You can use HTML and Liquid in your template.',
-  :labels     => { :data     => %(Edit the source code for your <em class="highlight">#{@tmpl.basename}</em> template),
+  :labels     => { :data     => %(Edit the source code for your <em class="highlight">#{@tmpl.basename}</em> template).html_safe,
                    :filename => 'Title of your template' }
  } %>
 <p class="btns">
