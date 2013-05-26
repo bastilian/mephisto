@@ -90,7 +90,7 @@ class ArticleTest < ActiveSupport::TestCase
 
   def test_should_cache_bluecloth
     a = Article.create :title => 'simple Title', :user => users(:arthur), :body => "# bar\n\nfoo", :filter => 'markdown_filter', :site_id => 1
-    assert_equal "<h1>bar</h1>\n\n<p>foo</p>", a.body_html
+    assert_equal "<h1>bar</h1>\n\n<p>foo</p>\n", a.body_html
   end
 
   def test_should_create_article_version
