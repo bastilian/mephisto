@@ -6,10 +6,6 @@ Encoding.default_external = Encoding.default_internal = Encoding::UTF_8
 # you don't control web/app server and can't set it the proper way
 # ENV['RAILS_ENV'] ||= 'production'
 
-#require 'rubygems'
-#require 'ruby-debug'
-#Debugger.start
-
 module Gem
   def self.source_index
     sources

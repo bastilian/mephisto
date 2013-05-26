@@ -1,11 +1,11 @@
 ENV["RAILS_ENV"] = "test"
+require File.expand_path('../../config/environment', __FILE__)
 ENV['TZ'] = 'US/Central'
 
-require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
-
 require 'test_help'
-require 'ruby-debug'
 require 'machinist'
+require 'mocha'
+
 require File.join(File.dirname(__FILE__), '..', 'spec', 'blueprints')
 require File.expand_path(File.dirname(__FILE__) + "/actor")
 ASSET_PATH = File.join(RAILS_ROOT, 'test/fixtures/tmp/assets') unless Object.const_defined?(:ASSET_PATH)
@@ -369,11 +369,3 @@ end
 #    end
 #  end
 #end
-
-begin
-  require 'ruby-debug'
-  Debugger.start
-rescue LoadError
-end
-
-require 'mocha'
