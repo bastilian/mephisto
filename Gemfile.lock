@@ -28,7 +28,6 @@ GEM
     activesupport (2.3.18)
     acts_as_list (0.1.2)
     awesome_print (1.1.0)
-    coderay (1.0.8)
     colorize (0.5.8)
     coveralls (0.6.7)
       colorize
@@ -94,7 +93,6 @@ DEPENDENCIES
   acts_as_list (= 0.1.2)
   acts_as_versioned!
   awesome_print
-  coderay
   coveralls
   faker
   json (~> 1.7.7)

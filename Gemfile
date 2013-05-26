@@ -8,7 +8,6 @@ gem 'rdiscount'
 gem 'rubyzip', :require => 'zip/zipfilesystem'
 gem 'liquid'
 gem 'will_paginate', '~> 2.3.16'
-gem 'coderay'
 gem 'tzinfo'
 gem 'rubyzip'
 
