@@ -49,7 +49,7 @@ GEM
     hoe (3.6.0)
       rake (>= 0.8, < 11.0)
     i18n (0.6.1)
-    json (1.7.5)
+    json (1.7.7)
     kgio (2.7.4)
     liquid (2.5.0)
     metaclass (0.0.1)
@@ -106,6 +106,7 @@ DEPENDENCIES
   coveralls
   debugger
   faker
+  json (~> 1.7.7)
   liquid
   machinist!
   mocha

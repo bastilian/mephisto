@@ -22,6 +22,8 @@ gem 'unicorn'
 
 gem 'coveralls', require: false
 
+gem 'json', '~> 1.7.7'
+
 group :test do
   gem 'faker'
   gem 'machinist', :git => "git://github.com/notahat/machinist.git", :branch => "1.0-maintenance"
