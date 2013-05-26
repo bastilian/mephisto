@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../../test_helper'
+require 'test_helper'
 
 # Re-raise errors caught by the controller.
 class Admin::ThemesController; def rescue_action(e) raise e end; end
@@ -25,7 +25,14 @@ class AdminThemesControllerTest < ActionController::TestCase
     get :index
     assert_redirected_to :controller => '/account', :action => 'login'
   end
-  
+
+  test "should export a theme and return a zip file" do
+    post :export, :id => "current"
+    assert_equal 'attachment; filename="current.zip"', @response.headers["Content-Disposition"]
+    assert_equal 'binary', @response.headers["Content-Transfer-Encoding"]
+    assert_response :success
+  end
+
   test "should show import form" do
     get :import
     assert_response :success
