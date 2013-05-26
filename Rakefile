@@ -9,4 +9,8 @@ require 'rdoc/task'
 
 require 'tasks/rails'
 
+require 'coveralls/rake/task'
+Coveralls::RakeTask.new
+task :test_with_coveralls => [:spec, :test, 'coveralls:push']
+
 task :default => [:spec, :test]

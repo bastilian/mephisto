@@ -2,6 +2,9 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 ENV['TZ'] = 'US/Central'
 
+require 'coveralls'
+Coveralls.wear_merged!('rails')
+
 require 'test_help'
 require 'machinist'
 require 'mocha'

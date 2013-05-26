@@ -4,6 +4,7 @@ rvm:
 notifications:
   email:
     - sebastian.graessl@gmail.com
+script: "bundle exec rake test_with_coveralls"
 before_script:
   - rake config/initializers/session_store.rb
   - cp config/database.example.yml config/database.yml
