@@ -29,6 +29,8 @@ module Gem
   end
 end
 
+require 'coveralls'
+Coveralls.wear!('rails')
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
