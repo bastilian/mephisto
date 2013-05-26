@@ -20,6 +20,8 @@ gem 'xml-simple'
 gem 'mysql2', '<= 0.2.6'
 gem 'unicorn'
 
+gem 'coveralls', require: false
+
 group :test do
   gem 'faker'
   gem 'machinist', :git => "git://github.com/notahat/machinist.git", :branch => "1.0-maintenance"
