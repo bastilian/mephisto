@@ -71,7 +71,25 @@ class Article < Content
   belongs_to :user
   unscope    :user
 
+  named_scope :with_permalink, lambda {|options| { :conditions => ['(contents.permalink = ?)', options[:permalink]] } }
+  named_scope :in_timeframe,   lambda {|options| { :conditions => ['(contents.published_at BETWEEN ? AND ?)', Time.delta(options[:year], options[:month], options[:day])].flatten } }
+  named_scope :published,      lambda { { :conditions => ["(contents.published_at IS NOT NULL AND contents.published_at <= ?)", Time.now.utc], :order => 'published_at desc' } }
+
   class << self
+
+    def find_by_permalink(options)
+      result = if options[:id]
+        published.find_by_id(options[:id])
+      elsif options[:permalink] && !(options[:year] || options[:month] || options[:day])
+        published.with_permalink(options)
+      elsif options[:year] || options[:month] || options[:day]
+        published.with_permalink(options).in_timeframe(options)
+      else
+        nil
+      end
+      result.is_a?(Array) ? result.first : result
+    end
+
     def with_published(&block)
       with_scope({:find => { :conditions => ['contents.published_at <= ? AND contents.published_at IS NOT NULL', Time.now.utc] } }, &block)
     end

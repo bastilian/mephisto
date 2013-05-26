@@ -42,27 +42,7 @@ class Site < ActiveRecord::Base
     end
   end
 
-  has_many  :articles, :dependent => :destroy do
-    def find_by_permalink(options)
-      conditions = 
-        ["(contents.published_at IS NOT NULL AND contents.published_at <= ?)", Time.now.utc].tap do |cond|
-          if options[:year]
-            from, to = Time.delta(options[:year], options[:month], options[:day])
-            cond.first << ' AND (contents.published_at BETWEEN ? AND ?)'
-            cond << from << to
-          end
-          
-          [:id, :permalink].each do |attr|
-            if options[attr]
-              cond.first << " AND (contents.#{attr} = ?)"
-              cond << options[attr]
-            end
-          end
-        end
-      
-      find :first, :conditions => conditions, :order => 'published_at desc'
-    end
-  end
+  has_many  :articles, :dependent => :destroy
   
   has_many  :comments, :order => 'comments.created_at desc', :dependent => :delete_all
   
