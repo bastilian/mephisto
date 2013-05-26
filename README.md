@@ -14,14 +14,18 @@ Forked & revived by [Sebastian Gräßl][5]
 3. Copy the database configuration and adjust it to your liking
    <pre><code>cp config/database.example.yml config/database.yml</pre></code>
 
-4. Generate the session key & secret
+4. Create a database. For example in Mysql:
+   <pre><code>mysql -e 'create database mephisto_development'</code></pre>
+   __Note: adjust database.yml if you use another db__
+
+5. Generate the session key & secret
    <pre><code>bundle exec rake config/initializers/session_store.rb</pre></code>
 
-5. Bootstrap the database
+6. Bootstrap the database
    <pre><code>bundle exec rake db:bootstrap</pre></code>
 
-6. Start the server and go to [http://localhost:3000/admin][6], login with **admin / testpassword** and enjoy!
-   <pre><code>bundle exec script/server</pre></code>
+7. Start the server and go to [http://localhost:8080/admin][6], login with **admin / testpassword** and enjoy!
+   <pre><code>bundle exec unicorn</pre></code>
 
 
 ### Upgrade Note:
@@ -56,5 +60,5 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 [3]: https://github.com/Caged "Justin Palmer on Github"
 [4]: https://github.com/emk "Eric Kidd on Github"
 [5]: https://github.com/bastilian "Sebastian Gräßl on Github"
-[6]: http://localhost:3000 "Local Mephisto"
+[6]: http://localhost:8080 "Local Mephisto"
 [7]: https://github.com/bastilian/mephisto/issues "Mephisto issues on Github"

@@ -1,4 +1,3 @@
-# A sample Gemfile
 source "http://rubygems.org"
 
 gem "rails", '2.3.18'
@@ -19,11 +18,7 @@ gem 'rubypants', '0.2.0'
 gem 'xml-simple'
 
 gem 'mysql2', '<= 0.2.6'
-gem 'sqlite3'
-
-group :development do
-  gem 'unicorn'
-end
+gem 'unicorn'
 
 group :test do
   gem 'faker'
