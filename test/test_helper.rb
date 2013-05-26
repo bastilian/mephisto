@@ -4,7 +4,7 @@ ENV['TZ'] = 'US/Central'
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 
 require 'coveralls'
-Coveralls.wear!
+Coveralls.wear!('rails')
 
 require 'test_help'
 require 'ruby-debug'

@@ -3,7 +3,7 @@ ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 
 require 'coveralls'
-Coveralls.wear!
+Coveralls.wear!('rails')
 
 MissingSourceFile::REGEXPS << [/^cannot load such file -- (.+)$/i, 1]
 
