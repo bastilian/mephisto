@@ -1,25 +1,22 @@
 # Set this if you're running under a sub directory
 # ActionController::AbstractRequest.relative_url_root = '/blog'
 
-# If it's safe to load the application, then go ahead and configure it.
-if safe_to_load_application?
-  require 'dispatcher'
+require 'dispatcher'
 
-  # TODO - We need to wrap these options in Dispatcher.to_prepare, because
-  # the underlying Site, etc., objects will be unloaded on each request in
-  # development mode, and the preferences will be reset.  This is a flaw
-  # in how we handle configuration, and to_prepare is just a workaround.
-  Dispatcher.to_prepare do
-    # Turn this on to get detailed cache sweeper logging in production mode
-    # Site.cache_sweeper_tracing = true
+# TODO - We need to wrap these options in Dispatcher.to_prepare, because
+# the underlying Site, etc., objects will be unloaded on each request in
+# development mode, and the preferences will be reset.  This is a flaw
+# in how we handle configuration, and to_prepare is just a workaround.
+Dispatcher.to_prepare do
+  # Turn this on to get detailed cache sweeper logging in production mode
+  # Site.cache_sweeper_tracing = true
 
-    # Enable if you want to host multiple sites on this app
-    Site.multi_sites_enabled = false
+  # Enable if you want to host multiple sites on this app
+  Site.multi_sites_enabled = false
 
-    # shouldn't need to set the host, it's set automatically
-    UserMailer.default_url_options[:host] = 'localhost:3000'
-    UserMailer.mail_from = 'webmaster@localhost'
-  end
+  # shouldn't need to set the host, it's set automatically
+  UserMailer.default_url_options[:host] = 'localhost:3000'
+  UserMailer.mail_from = 'webmaster@localhost'
 end
 
 # defaults to ImageScience, then RMagick, then nothing

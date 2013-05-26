@@ -29,19 +29,11 @@ if ENV["RAILS_ENV"] == "test"
   require 'coveralls'
   Coveralls.wear!('rails')
 end
+
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 require File.join(File.dirname(__FILE__), '../vendor/plugins/engines/boot')
 require File.join(File.dirname(__FILE__), '../lib/mephisto/plugin')
-
-# Don't load the application when running rake db:* tasks, because doing so
-# will try to access database tables before they exist.  See
-# http://rails.lighthouseapp.com/projects/8994/tickets/63, which allegedly
-# fixes this problem.  Here's where I got the idea:
-# http://justbarebones.blogspot.com/2008/05/rails-202-restful-authentication-and.html
-def safe_to_load_application?
-  File.basename($0) != "rake" || !ARGV.any? {|a| a =~ /^(db|gems):/ }
-end
 
 # Make sure we a site-specific secret key file.
 unless File.exists?(File.join(File.dirname(__FILE__),
@@ -54,7 +46,6 @@ end
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence those specified here
-
   config.autoload_paths += %W( #{RAILS_ROOT}/app/cachers #{RAILS_ROOT}/app/drops #{RAILS_ROOT}/app/filters )
 
   # Force all environments to use the same logger level 
@@ -68,10 +59,7 @@ Rails::Initializer.run do |config|
   # (enables use of different database adapters for development and test environments)
   config.active_record.schema_format = :ruby
 
-  # Register our observers.
-  if safe_to_load_application?
-    config.active_record.observers = [:article_observer, :comment_observer]
-  end
+  config.active_record.observers = [:article_observer, :comment_observer]
 
   # Allow table tags in untrusted HTML, but block img tags to prevent
   # SRC attributes from being used in CSRF attacks.
