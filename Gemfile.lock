@@ -15,7 +15,7 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
-    RedCloth (3.0.4)
+    RedCloth (4.2.9)
     actionmailer (2.3.18)
       actionpack (= 2.3.18)
     actionpack (2.3.18)
@@ -90,7 +90,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  RedCloth (= 3.0.4)
+  RedCloth
   acts_as_list (= 0.1.2)
   acts_as_versioned!
   awesome_print

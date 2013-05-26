@@ -2,7 +2,7 @@ source "http://rubygems.org"
 
 gem "rails", '2.3.18'
 gem 'rdoc'
-gem 'RedCloth', '3.0.4', :require => 'redcloth'
+gem 'RedCloth', :require => 'redcloth'
 gem 'rdiscount'
 gem 'rubyzip', :require => 'zip/zipfilesystem'
 gem 'liquid'
