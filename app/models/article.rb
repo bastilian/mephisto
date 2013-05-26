@@ -74,6 +74,7 @@ class Article < Content
   named_scope :with_permalink, lambda {|options| { :conditions => ['(contents.permalink = ?)', options[:permalink]] } }
   named_scope :in_timeframe,   lambda {|options| { :conditions => ['(contents.published_at BETWEEN ? AND ?)', Time.delta(options[:year], options[:month], options[:day])].flatten } }
   named_scope :published,      lambda { { :conditions => ["(contents.published_at IS NOT NULL AND contents.published_at <= ?)", Time.now.utc], :order => 'published_at desc' } }
+  named_scope :tagged,         lambda {|tags| {:conditions => ["tags.name IN (?)", tags], :include => [:user, :tags]} }
 
   class << self
 
@@ -101,13 +102,11 @@ class Article < Content
     end
     
     def find_all_in_month(year, month, options = {})
-      find(:all, options.merge(:order => 'contents.published_at DESC', :conditions => ["contents.published_at <= ? AND contents.published_at BETWEEN ? AND ?", 
-        Time.now.utc, *Time.delta(year.to_i, month.to_i)]))
+      published.in_timeframe({:year => year, :month => month}).find(:all, options)
     end
     
     def find_all_by_tags(tag_names, limit = 15)
-      find(:all, :order => 'contents.published_at DESC', :include => [:tags, :user], :limit => limit,
-        :conditions => ['(contents.published_at <= ? AND contents.published_at IS NOT NULL) AND tags.name IN (?)', Time.now.utc, tag_names])
+      published.tagged(tag_names).find(:all, {:limit => limit})
     end
     
     def permalink_for(str)
