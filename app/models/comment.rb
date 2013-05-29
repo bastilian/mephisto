@@ -13,6 +13,8 @@ class Comment < Content
   has_one :event, :dependent => :destroy
   before_create  :check_if_previewing
 
+  liquify
+
   attr_accessible :article, :article_id, :user_id, :user, :excerpt, :body, :author, :author_url, :author_email, :author_ip, :user_agent, :referrer, :preview
   attr_accessor :preview
   class Previewing < StandardError; end
@@ -29,10 +31,6 @@ class Comment < Content
       :order  => 'contents.created_at DESC')
   end
 
-  def to_liquid
-    CommentDrop.new self
-  end
-  
   def approved=(value)
     @old_approved ||= approved? ? :true : :false
     write_attribute :approved, value

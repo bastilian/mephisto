@@ -9,6 +9,8 @@ class Article < Content
   after_save    :save_assigned_sections
   after_update  :reset_comment_attributes
 
+  liquify
+
   acts_as_versioned :if_changed => [:title, :body, :excerpt], :limit => 5 do
     def self.included(base)
       base.send :include, Mephisto::TaggableMethods
@@ -137,12 +139,6 @@ class Article < Content
   
   def recently_published?
     @recently_published
-  end
-
-  # :mode - single / list.  Specifies whether the body is only the excerpt or not
-  # :page - true / false.  Specifies whether the article is the main section page.
-  def to_liquid(options = {})
-    ArticleDrop.new self, options
   end
 
   def filter=(new_filter)

@@ -4,14 +4,17 @@ class ArticleDrop < BaseDrop
   timezone_dates :published_at, :updated_at
   liquid_attributes << :title << :permalink << :comments_count
   
+  # Options:
+  # :mode - single / list.  Specifies whether the body is only the excerpt or not
+  # :page - true / false.  Specifies whether the article is the main section page.
   def initialize(source, options = {})
     super source
-    @options  = options
+    @options  = options||{}
     @liquid.update \
       'body'            => @source.body_html,
       'excerpt'         => (@source.excerpt_html.blank? ? nil : @source.excerpt_html),
       'accept_comments' => @source.accept_comments?,
-      'is_page_home'    => (options[:page] == true)
+      'is_page_home'    => (@options[:page] == true)
   end
   
   def author

@@ -4,7 +4,7 @@ class BaseDrop < Liquid::Drop
   attr_reader :source
   delegate :hash, :to => :source
   
-  def initialize(source)
+  def initialize(source, options={})
     @source = source
     @liquid = liquid_attributes.inject({}) { |h, k| h.update k.to_s => @source.send(k) }
   end

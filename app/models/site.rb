@@ -27,6 +27,8 @@ class Site < ActiveRecord::Base
     @@template_handlers.keys
   end
 
+  liquify
+
   has_many  :sections, :order => "position", :dependent => :destroy do
     def home
       find_by_path ''
@@ -73,7 +75,7 @@ class Site < ActiveRecord::Base
     comment.has_many :unapproved_comments, :conditions => ['contents.approved = ? or contents.approved is null', false]
     comment.has_many :all_comments
   end
-  
+
   def self.search_by_host_or_title(search_string)
     conditions = search_string.blank? ? nil : ["host LIKE ? OR title LIKE ?"] + ["%#{search_string}%"] * 2
     with_scope( :find => { :conditions => conditions } ) do
@@ -189,10 +191,6 @@ class Site < ActiveRecord::Base
     end
   end
   
-  def to_liquid(current_section = nil)
-    SiteDrop.new self, current_section
-  end
-
   composed_of :timezone, :class_name => 'TZInfo::Timezone', :mapping => %w(timezone name)
 
   def timezone_name

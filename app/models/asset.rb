@@ -44,6 +44,8 @@ class Asset < ActiveRecord::Base
 
   include Mephisto::TaggableMethods
 
+  liquify
+
   belongs_to :site
   has_many :assigned_assets, :order => 'position', :dependent => :destroy
 
@@ -89,10 +91,6 @@ class Asset < ActiveRecord::Base
 
   [:movie, :audio, :other, :pdf].each do |content|
     define_method("#{content}?") { self.class.send("#{content}?", content_type) }
-  end
-
-  def to_liquid
-    AssetDrop.new self
   end
 
   protected

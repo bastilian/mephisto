@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :login, :email, :case_sensitve => false
   before_save :encrypt_password
 
+  liquify
+
   has_many :articles
 
   has_many :memberships, :dependent => :destroy
@@ -110,10 +112,6 @@ class User < ActiveRecord::Base
       self.token_expires_at = 2.weeks.from_now.utc
       save!
     end
-  end
-
-  def to_liquid
-    UserDrop.new self
   end
 
   def destroy

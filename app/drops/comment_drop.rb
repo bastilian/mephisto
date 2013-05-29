@@ -4,7 +4,7 @@ class CommentDrop < BaseDrop
   timezone_dates :published_at, :created_at
   liquid_attributes.push(:title) # Not sure who uses this.
 
-  def initialize(source)
+  def initialize(source, options = {})
     super
     @liquid.update('is_approved' => @source.approved?,
                    'body' => ActionView::Base.white_list_sanitizer.sanitize(@source.body_html))
