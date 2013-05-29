@@ -79,7 +79,9 @@ class Article < Content
   class << self
 
     def find_by_permalink(options)
-      result = if options[:id]
+      result = if options.is_a?(String)
+        published.with_permalink(:permalink => options)
+      elsif options[:id]
         published.find_by_id(options[:id])
       elsif options[:permalink] && !(options[:year] || options[:month] || options[:day])
         published.with_permalink(options)

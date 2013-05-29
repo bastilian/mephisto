@@ -13,11 +13,6 @@ class Section < ActiveRecord::Base
       find(:first, { :conditions => ['contents.published_at <= ? AND contents.published_at IS NOT NULL', Time.now.utc] } \
         .merge(options))
     end
-
-    def find_by_permalink(permalink, options = {})
-      find(:first, { :conditions => ['contents.permalink = ? AND published_at <= ? AND contents.published_at IS NOT NULL',
-                                      permalink, Time.now.utc] }.merge(options))
-    end
   end
 
   class << self
