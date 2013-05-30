@@ -22,12 +22,11 @@ gem 'coveralls', require: false
 
 gem 'json', '~> 1.7.7'
 
-group :test do
+group :test, :development do
   gem 'faker'
   gem 'machinist', :git => "git://github.com/notahat/machinist.git", :branch => "1.0-maintenance"
   gem 'mocha', :require => false
-  gem "rspec", "1.3.0"
-  gem "rspec-rails", "1.3.2"
+  gem "rspec-rails", "1.3.4"
   gem 'test-unit', '1.2.3'
   gem 'awesome_print'
 end
