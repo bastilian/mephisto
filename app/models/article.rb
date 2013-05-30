@@ -60,6 +60,8 @@ class Article < Content
   named_scope :in_timeframe,   lambda {|options| { :conditions => ['(contents.published_at BETWEEN ? AND ?)', Time.delta(options[:year], options[:month], options[:day])].flatten } }
   named_scope :published,      lambda { { :conditions => ["(contents.published_at IS NOT NULL AND contents.published_at <= ?)", Time.now.utc], :order => 'published_at desc' } }
   named_scope :tagged,         lambda {|tags| {:conditions => ["tags.name IN (?)", tags], :include => [:user, :tags]} }
+  named_scope :in_section,     lambda {|section| { :conditions => ['assigned_sections.section_id = ?', section.id], 
+                                                   :joins => 'inner join assigned_sections on contents.id = assigned_sections.article_id' }}
 
   class << self
 
@@ -162,20 +164,12 @@ class Article < Content
   def next(section=nil)
     return nil if section && !sections.include?(section)
     section = sections[0] if (section.nil?)
-    self.class.with_published do
-      if section
-        if section.paged?
-          index = section.articles.index(self)
-          (index <= section.articles.length-1) ? section.articles[index+1] : nil
-          # article = section.articles.detect {|article| article.id == id }
-        else
-          site.articles.find :first, :conditions => ['published_at > ? and assigned_sections.section_id = ?', published_at, section.id], 
-            :joins => 'inner join assigned_sections on contents.id = assigned_sections.article_id',
-            :order => 'published_at'
-        end
-      else
-        site.articles.find :first, :conditions => ['published_at > ?', published_at], :order => 'published_at'
-      end
+    if section.paged?
+      articles_in_section = section.articles.published
+      index = articles_in_section.index(self)
+      (index <= articles_in_section.length-1) ? articles_in_section[index+1] : nil
+    else
+      site.articles.published.in_section(section).first
     end
   end
 
