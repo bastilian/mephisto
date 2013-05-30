@@ -15,6 +15,8 @@ class Section < ActiveRecord::Base
     end
   end
 
+  liquify
+
   class << self
     # scopes a find operation to return only paged sections
     def find_paged(options = {})
@@ -34,10 +36,6 @@ class Section < ActiveRecord::Base
 
   def comments(options = {})
     Comment.find_all_by_section(self, options)
-  end
-
-  def to_liquid(current = false)
-    SectionDrop.new self, current
   end
 
   # orders articles assigned to this section
