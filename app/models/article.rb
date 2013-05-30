@@ -176,20 +176,11 @@ class Article < Content
   def previous(section=nil)
     return nil if section && !sections.include?(section)
     section = sections[0] if (section.nil?)
-    self.class.with_published do
-      if section
-        if section.paged?
-          index = section.articles.index(self)
-          (index > 0) ? section.articles[index-1] : nil
-          # article = section.articles.detect {|article| article.id == id }
-        else
-          site.articles.find :first, :conditions => ['published_at < ? and assigned_sections.section_id = ?', published_at, section.id], 
-            :joins => 'inner join assigned_sections on contents.id = assigned_sections.article_id',
-            :order => 'published_at desc'
-        end
-      else
-        site.articles.find :first, :conditions => ['published_at < ?', published_at], :order => 'published_at desc'
-      end
+    if section.paged?
+      index = section.articles.published.index(self)
+      (index > 0) ? section.articles.published[index-1] : nil
+    else
+      site.articles.published.in_section(section).find(:first, {:conditions => ['published_at < ?', published_at], :order => 'published_at desc'})
     end
   end
 
