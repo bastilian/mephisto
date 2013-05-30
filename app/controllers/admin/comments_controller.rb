@@ -21,18 +21,18 @@ public
 
   def index
     @comment  = Comment.new
-    @articles = site.unapproved_comments.count :all, :group => :article, :order => '1 desc'
+    @articles = site.comments.unapproved.count :all, :group => :article, :order => '1 desc'
     params[:filter] = 'unapproved' if @article.nil?
-    @comments = 
-      (@article || @site).send case params[:filter]
-        when 'approved'   then :comments
-        when 'unapproved' then :unapproved_comments
-        else                   :all_comments
-      end
+
+    @comments = (@article || @site).comments.send case params[:filter]
+      when 'approved'   then :approved
+      when 'unapproved' then :unapproved
+      else                   :all
+    end
   end
-  
+
   def unapproved
-    site.unapproved_comments.find(:all, :include => :article)
+    site.comments.unapproved.find(:all, :include => :article)
   end
   
   def create
@@ -47,29 +47,31 @@ public
   end
   
   def edit
-    @comment = @article.all_comments.find params[:id]
+    @comment = @article.comments.find params[:id]
   end
   
   def update
-    @comment = @article.all_comments.find params[:id]
+    @comment = @article.comments.find params[:id]
     @comment.update_attributes(params[:comment])
   end
 
   # xhr baby
   # needs some restful lovin'
   def approve
-    @comment = @article.unapproved_comments.approve(params[:comment] || params[:id])
+    @comment = @article.comments.find(params[:comment] || params[:id])
+    @comment.approve
     @comment.mark_as_ham(site, request)
   end
 
   def unapprove
-    @comment = @article.comments.unapprove(params[:comment] || params[:id])
+    @comment = @article.comments.approved.find(params[:comment] || params[:id])
+    @comment.unapprove
     @comment.mark_as_spam(site, request)
     render :action => 'approve'
   end
   
   def destroy
-    @comments = site.all_comments.find :all, :conditions => ['id in (?)', [ (params[:comment] || params[:id])].flatten] # rescue []
+    @comments = site.comments.find :all, :conditions => ['id in (?)', [ (params[:comment] || params[:id])].flatten] # rescue []
     Comment.transaction { @comments.each(&:destroy) } if @comments.any?
   end
   

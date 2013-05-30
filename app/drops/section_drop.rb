@@ -25,7 +25,7 @@ class SectionDrop < BaseDrop
   end
 
   def latest_comments(limit = nil)
-    liquify(*@source.find_comments(:limit => (limit || @source.articles_per_page)))
+    liquify(*@source.comments(:limit => (limit || @source.articles_per_page)))
   end
 
   def pages

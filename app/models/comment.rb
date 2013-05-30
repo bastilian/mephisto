@@ -1,23 +1,32 @@
 require 'uri'
 
 class Comment < Content
+
   validates_presence_of :author, :author_ip, :article_id, :body
   validates_format_of :author_email, :with => Format::EMAIL
   before_validation :clean_up_author_email
   before_validation :clean_up_author_url
   after_validation_on_create  :snag_article_attributes
-  before_create  :check_comment_expiration
-  before_save    :update_counter_cache
-  before_destroy :decrement_counter_cache
+
+  before_create   :check_comment_expiration
+  before_create   :check_if_previewing
+
+  before_save     :update_counter_cache
+  before_destroy  :decrement_counter_cache
+
   belongs_to :article
-  has_one :event, :dependent => :destroy
-  before_create  :check_if_previewing
+  has_one    :event,   :dependent => :destroy
 
   liquify
 
   attr_accessible :article, :article_id, :user_id, :user, :excerpt, :body, :author, :author_url, :author_email, :author_ip, :user_agent, :referrer, :preview
   attr_accessor :preview
   class Previewing < StandardError; end
+
+  default_scope :order => 'contents.created_at DESC'
+
+  named_scope   :approved,   { :conditions => {:approved => true} }
+  named_scope   :unapproved, { :conditions => ['contents.approved = ? or contents.approved is null', false] }
 
   # If the view sends the "preview" accessor, we raise this
   # error so the controller can simply rescue 
@@ -32,7 +41,7 @@ class Comment < Content
   end
 
   def approved=(value)
-    @old_approved ||= approved? ? :true : :false
+    
     write_attribute :approved, value
   end
 
@@ -74,6 +83,15 @@ class Comment < Content
     mark_comment :ham, site, request
   end
 
+  def approve
+    self.update_attribute(:approved, true)
+  end
+
+  def unapprove
+    self.update_attribute(:approved, false)
+  end
+
+
   protected
     def snag_article_attributes
       self.filter ||= article.site.filter
@@ -85,8 +103,9 @@ class Comment < Content
     end
 
     def update_counter_cache
-      Article.increment_counter 'comments_count', article_id if  approved? && @old_approved == :false
-      Article.decrement_counter 'comments_count', article_id if !approved? && @old_approved == :true
+      if approved_changed?
+        Article.send((approved? ? :increment_counter : :decrement_counter), 'comments_count', article_id)
+      end
     end
     
     def decrement_counter_cache

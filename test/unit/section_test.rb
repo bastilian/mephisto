@@ -16,7 +16,7 @@ class SectionTest < ActiveSupport::TestCase
   end
 
   def test_should_find_comments_by_section
-    assert_models_equal [contents(:welcome_comment)], sections(:home).find_comments(:limit => 3)
+    assert_models_equal [contents(:welcome_comment)], sections(:home).comments(:limit => 3)
   end
 
   def test_should_not_allow_nil_path

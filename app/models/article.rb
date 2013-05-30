@@ -35,26 +35,9 @@ class Article < Content
   has_many :sections, :through => :assigned_sections, :order => 'sections.name'
 
   has_many :events,   :order => 'created_at desc', :dependent => :delete_all
-  with_options :order => 'created_at', :class_name => 'Comment' do |comment|
-    comment.has_many :comments,            :conditions => ['contents.approved = ?', true]  do
-      def unapprove(id)
-        find(id).tap do |comment|
-          comment.approved = false
-          comment.save
-        end
-      end
-    end
-    comment.has_many :unapproved_comments, :conditions => ['contents.approved = ?', false] do
-      def approve(id)
-        find(id).tap do |comment|
-          comment.approved = true
-          comment.save
-        end
-      end
-    end
-    comment.has_many :all_comments, :dependent => :delete_all
-  end
-  
+
+  has_many :comments, :dependent => :delete_all
+
   has_many :assigned_assets, :order => 'position', :dependent => :destroy
   has_many :assets, :through => :assigned_assets, :conditions => ['assigned_assets.active = ?', true], :select => 'assets.*, assigned_assets.label' do
     def add(asset, label = nil)

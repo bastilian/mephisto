@@ -46,7 +46,7 @@ class Site < ActiveRecord::Base
 
   has_many  :articles, :dependent => :destroy
   
-  has_many  :comments, :order => 'comments.created_at desc', :dependent => :delete_all
+  has_many  :comments, :dependent => :delete_all
   
   has_many  :events, :dependent => :destroy
   
@@ -68,13 +68,7 @@ class Site < ActiveRecord::Base
   
   after_create :setup_site_theme_directories
   after_create { |site| site.sections.create(:name => 'Home') }
-  before_destroy :flush_cache_and_remove_site_directories    
-
-  with_options :order => 'contents.created_at DESC', :class_name => 'Comment' do |comment|
-    comment.has_many :comments,            :conditions => ['contents.approved = ?', true]
-    comment.has_many :unapproved_comments, :conditions => ['contents.approved = ? or contents.approved is null', false]
-    comment.has_many :all_comments
-  end
+  before_destroy :flush_cache_and_remove_site_directories
 
   def self.search_by_host_or_title(search_string)
     conditions = search_string.blank? ? nil : ["host LIKE ? OR title LIKE ?"] + ["%#{search_string}%"] * 2

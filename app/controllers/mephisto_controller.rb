@@ -120,7 +120,7 @@ class MephistoController < ApplicationController
     def dispatch_comments_feed
       show_404 and return unless find_article
       @feed_title = "Comments"
-      @comments = @article.comments
+      @comments = @article.comments.approved
       @comments.reverse!
       render :action => 'feed', :content_type => 'application/xml'
     end

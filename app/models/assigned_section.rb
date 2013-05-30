@@ -1,6 +1,7 @@
 class AssignedSection < ActiveRecord::Base
   belongs_to :article
   belongs_to :section, :counter_cache => 'articles_count'
+
   acts_as_list :scope => :section_id
   validates_presence_of :article_id, :section_id
   validate_on_create    :check_for_dupe_article_and_section

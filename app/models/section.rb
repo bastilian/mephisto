@@ -32,7 +32,7 @@ class Section < ActiveRecord::Base
     end
   end
 
-  def find_comments(options = {})
+  def comments(options = {})
     Comment.find_all_by_section(self, options)
   end
 

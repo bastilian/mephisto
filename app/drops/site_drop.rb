@@ -28,7 +28,7 @@ class SiteDrop < BaseDrop
 
   def latest_comments(limit = nil)
     return @comments if @comments && limit == @source.articles_per_page
-    comments = liquify(*@source.comments.find(:all, :limit => (limit || @source.articles_per_page)))
+    comments = liquify(*@source.comments.approved.find(:all, :limit => (limit || @source.articles_per_page)))
     limit == @source.articles_per_page ? (@comments = comments) : comments
   end
 

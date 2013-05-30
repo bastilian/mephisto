@@ -5,7 +5,7 @@ class CommentTest < ActiveSupport::TestCase
 
   def test_sti_associations
     assert_equal contents(:welcome), contents(:welcome_comment).article
-    assert_equal [contents(:welcome_comment)], contents(:welcome).comments
+    assert_equal [contents(:welcome_comment)], contents(:welcome).comments.approved
   end
 
   def test_should_add_comment_and_retrieve_attributes_from_article
@@ -19,19 +19,19 @@ class CommentTest < ActiveSupport::TestCase
   end
 
   def test_should_pass_filter_down_from_article_site
-    old_times = contents(:welcome).comments.collect &:updated_at
+    old_times = contents(:welcome).comments.approved.collect &:updated_at
     comment = contents(:welcome).comments.create :body => 'test comment', :author => 'bob', :author_ip => '127.0.0.1'
     assert_equal 'textile_filter', comment.filter
     assert comment.valid?
-    assert_equal old_times, contents(:welcome).comments(true).collect(&:updated_at)
+    assert_equal old_times, contents(:welcome).comments.approved.collect(&:updated_at)
   end
 
   def test_should_allow_set_filter_on_comment
-    old_times = contents(:welcome).comments.collect &:updated_at
+    old_times = contents(:welcome).comments.approved.collect &:updated_at
     comment = contents(:welcome).comments.create :body => 'test comment', :author => 'bob', :author_ip => '127.0.0.1'
     comment.filter = 'markdown_filter'
     assert comment.valid?
-    assert_equal old_times, contents(:welcome).comments(true).collect(&:updated_at)
+    assert_equal old_times, contents(:welcome).comments.approved.collect(&:updated_at)
   end
 
   def test_should_process_textile_when_adding_comment
@@ -54,16 +54,14 @@ class CommentTest < ActiveSupport::TestCase
   def test_should_increment_comment_count_upon_approval
     assert_difference contents(:welcome), :comments_count do
       contents(:unwelcome_comment).author = 'approved rico' # test method of setting approved comment
-      assert contents(:unwelcome_comment).save
-      assert contents(:unwelcome_comment).approved?
+      assert contents(:unwelcome_comment).approve
       contents(:welcome).reload
     end
   end
   
   def test_should_decrement_comment_count_upon_unapproval
     assert_difference contents(:welcome), :comments_count, -1 do
-      contents(:welcome_comment).approved = false
-      assert contents(:welcome_comment).save
+      contents(:welcome_comment).unapprove
       contents(:welcome).reload
     end
   end

@@ -17,7 +17,7 @@ class Admin::ArticlesController < Admin::BaseController
     @articles = site.articles.paginate(article_options(:order => 'contents.published_at DESC', :select => 'contents.*',
                                                        :page => params[:page], :per_page => params[:per_page]))
     
-    @comments = @site.unapproved_comments.count :all, :group => :article, :order => '1 desc'
+    @comments = @site.comments.unapproved.count :all, :group => :article, :order => '1 desc'
     @sections = site.sections.find(:all)
   end
 
