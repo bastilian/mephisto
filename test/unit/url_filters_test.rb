@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 class UrlFiltersTest < ActiveSupport::TestCase
   fixtures :sites, :sections, :contents
   include CoreFilters, UrlFilters

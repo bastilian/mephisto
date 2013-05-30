@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class LiquidTest < ActiveSupport::TestCase
   test "should allow sorting in for block" do

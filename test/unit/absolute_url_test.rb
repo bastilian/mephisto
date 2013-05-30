@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 # DEPRECATED, see spec/filters/absolute_url_spec.rb
 

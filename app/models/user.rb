@@ -1,4 +1,3 @@
-require 'digest/sha1'
 class User < ActiveRecord::Base
   @@admin_scope = {:find => { :conditions => ['admin = ?', true] } }
   @@membership_options = {:select => 'distinct users.*, memberships.admin as site_admin', :order => 'users.login',

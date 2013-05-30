@@ -1,6 +1,3 @@
-require 'uri'
-require 'mephisto/theme_root'
-
 class Site < ActiveRecord::Base
   @@default_assigns = {}
   @@theme_path      = Object::THEME_ROOT

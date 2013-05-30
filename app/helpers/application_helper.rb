@@ -1,4 +1,3 @@
-require 'digest/md5'
 module ApplicationHelper
 
   def author_link_for(comment)

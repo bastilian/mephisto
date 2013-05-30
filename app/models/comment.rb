@@ -1,5 +1,3 @@
-require 'uri'
-
 class Comment < Content
 
   validates_presence_of :author, :author_ip, :article_id, :body

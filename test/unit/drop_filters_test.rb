@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 class DropFiltersTest < ActiveSupport::TestCase
   fixtures :sites, :sections, :contents, :assigned_sections, :assigned_assets, :assets
   include DropFilters, CoreFilters

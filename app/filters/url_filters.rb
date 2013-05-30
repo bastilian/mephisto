@@ -1,4 +1,3 @@
-require 'digest/md5'
 module UrlFilters
   include Mephisto::Liquid::UrlMethods
   include ActionView::Helpers::TagHelper

@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class ArticleTest < ActiveSupport::TestCase
   fixtures :contents, :users, :sections, :sites, :assigned_sections

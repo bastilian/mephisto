@@ -1,6 +1,3 @@
-require 'rubypants'
-require 'base64'
-
 require 'mephisto'
 require 'mephisto/theme_root'
 
