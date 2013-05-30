@@ -32,8 +32,6 @@ end
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
-require File.join(File.dirname(__FILE__), '../vendor/plugins/engines/boot')
-require File.join(File.dirname(__FILE__), '../lib/mephisto/plugin')
 
 # Make sure we a site-specific secret key file.
 unless File.exists?(File.join(File.dirname(__FILE__),

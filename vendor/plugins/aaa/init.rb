@@ -64,6 +64,3 @@ Class.class_eval do
   
   alias_method_chain :inherited, :mixins
 end
-
-require 'mephisto/plugin'
-

@@ -29,12 +29,7 @@ module Mephisto
       map.admin    'admin', :controller => 'admin/overview', :action => 'index'
       map.resources :assets, :path_prefix => '/admin', :controller => 'admin/assets', :member => { :add_bucket => :post },
         :collection => { :latest => [:get, :post], :search => [:get, :post], :upload => :post, :clear_bucket => :post }
-      
-      # Where oh where is my xmlrpc code?
-      # map.connect 'xmlrpc', :controller => 'backend', :action => 'xmlrpc' 
-      
-      map_from_plugins(map)
-      
+
       map.connect(':controller/:action/:id/:version',
                   :controller => /routing_navigator|account|admin\/\w+/,
                   :action => /[^\/]*/,
@@ -50,17 +45,7 @@ module Mephisto
     class << self
       expiring_attr_reader :redirections,  '{}'
     end
-    
-    def self.map_from_plugins(map)
-      if map.respond_to?(:from_plugin)
-        Engines.plugins.each { |plugin| map.from_plugin(plugin.name) }
-      else
-        # This happens when running 'rake gems' under Rails 2.2 when some
-        # gems are not yet installed.
-        Rails.logger.warn "Cannot set up plugin routes because engines isn't loaded yet"
-      end
-    end
-    
+
     def self.deny(*paths)
       paths.each do |path|
         redirections[convert_redirection_to_regex(path)] = :deny

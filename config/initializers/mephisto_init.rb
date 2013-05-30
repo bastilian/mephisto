@@ -3,10 +3,6 @@ require 'action_controller/dispatcher'
 require 'rubypants'
 require 'base64'
 
-# temporarily moved to vendor/plugins/aaa/init.rb to make sure
-# it's loaded before all other plugins
-# Object::RAILS_PATH = Pathname.new(File.expand_path(RAILS_ROOT))
-
 require 'mephisto'
 require 'mephisto/theme_root'
 
@@ -25,5 +21,3 @@ ActiveSupport::Inflector.inflections do |inflect|
   #inflect.irregular 'person', 'people'
   inflect.uncountable %w( audio )
 end
-
-Engines::Plugin::Config.set_table_name 'mephisto_plugins'
