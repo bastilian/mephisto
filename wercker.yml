@@ -1,0 +1,16 @@
+box: wercker/ruby
+services:
+  - wercker/mysql
+build:
+    steps:
+        - bundle-install
+        - rails-database-yml
+        - script:
+            name: generate session secrete
+            code: rake config/initializers/session_store.rb
+        - script:
+            name: migrate
+            code: bundle exec rake db:bootstrap RAILS_ENV=test
+        - script:
+            name: run tests
+            code: bundle exec rake
